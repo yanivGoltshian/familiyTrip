@@ -100,7 +100,7 @@ const TRIP = {
       ],
     },
     {
-      id: "efrat", name: "אפרת", full: "BEN HAMO / EFRAT", role: "החברה שמצטרפת לאגדה ✨", emoji: "👩",
+      id: "efrat", name: "אפרת", full: "BEN HAMO / EFRAT", role: "פיית האופנה מבית נייקי 👟✨", emoji: "👩",
       type: "adult", group: "א", checked: true, trolley: true,
       color: "#e85d8a",
       packTitle: "אופנה לחוף ולערב",
