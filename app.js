@@ -465,7 +465,7 @@
   // התקנת אפליקציה (PWA)
   let deferredPrompt = null;
   const installBanner = $("#installBanner"), installBtn = $("#installBtn"),
-        installClose = $("#installClose"), iosHint = $("#iosInstallHint");
+        installClose = $("#installClose");
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
   const installDismissed = localStorage.getItem("cyprus2026_install_dismissed");
   const SHOW_KEY = "cyprus2026_install_shows";
@@ -497,23 +497,6 @@
     localStorage.setItem("cyprus2026_install_dismissed", "1");
   });
   window.addEventListener("appinstalled", () => { if (installBanner) installBanner.hidden = true; });
-
-  // iOS Safari — אין beforeinstallprompt; לחיצה פותחת את גיליון השיתוף («הוסף למסך הבית»)
-  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-  const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
-  if (isIOS && isSafari && iosHint && canShowInstall()) {
-    setTimeout(() => { iosHint.hidden = false; }, 2600);
-    iosHint.style.cursor = "pointer";
-    bumpInstallShows();
-    iosHint.addEventListener("click", async () => {
-      if (navigator.share) { try { await navigator.share({ title: document.title, url: location.href }); } catch (e) {} }
-    });
-    const ic = $("#iosHintClose");
-    if (ic) ic.addEventListener("click", (e) => {
-      e.stopPropagation();
-      iosHint.hidden = true; localStorage.setItem("cyprus2026_install_dismissed", "1");
-    });
-  }
 
   // רישום Service Worker (אופליין + התקנה)
   if ("serviceWorker" in navigator) {

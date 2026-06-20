@@ -1,5 +1,5 @@
 /* Service Worker — ספר האגדות של המשפחה · קפריסין 2026 */
-const CACHE = "cyprus2026-v2";
+const CACHE = "cyprus2026-v3";
 const CORE = [
   "./",
   "./index.html",

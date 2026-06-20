@@ -129,11 +129,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   background:linear-gradient(180deg,#8a5be0,#6d28d9);box-shadow:0 6px 16px rgba(109,40,217,.4)}
 .ib-btn:active{transform:scale(.95)}
 .ib-x{flex:none;width:30px;height:30px;border-radius:50%;color:var(--ink-soft);font-size:1rem;background:rgba(0,0,0,.06)}
-.ios-hint{position:fixed;left:12px;right:12px;bottom:12px;z-index:900;display:flex;align-items:center;gap:10px;
-  padding:12px 40px 12px 14px;border-radius:16px;font-size:.9rem;color:#fff;
-  background:linear-gradient(160deg,#4a2f8e,#2a1a5e);border:1.5px solid var(--gold-deep);box-shadow:var(--shadow)}
-.ios-hint b{color:var(--gold-glow)}
-.ios-x{position:absolute;left:8px;top:8px;width:26px;height:26px;border-radius:50%;color:#fff;background:rgba(255,255,255,.15)}
 
 /* ============================================================
    ניווט
