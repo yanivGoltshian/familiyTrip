@@ -247,9 +247,11 @@
         <div class="place-top"><span class="place-emoji">${r.emoji}</span>
           <div><div class="place-name">${r.he}</div><div class="place-he">${r.name}</div></div></div>
         ${ratingBadge(r)}
+        ${r.music ? `<span class="place-music">🎶 מוזיקה יוונית חיה</span>` : ""}
         <span class="place-walk">🚶 ${r.walk}</span>
         <div class="place-cuisine">${r.cuisine}</div>
         ${r.mainNis ? `<div class="place-price">💰 כ-<b>₪${r.mainNis}</b> למנה עיקרית <span class="rev">(${r.price})</span></div>` : ""}
+        ${r.dish ? `<div class="place-dish">⭐ מנה מומלצת: <b>${r.dish}</b></div>` : ""}
         <ul class="place-menu">${r.menu.map(m => `<li>${m}</li>`).join("")}</ul>
         <div class="place-links">
           <a class="place-link" href="${r.mapUrl}" target="_blank" rel="noopener">📍 לניווט ↗</a>

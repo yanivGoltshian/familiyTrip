@@ -390,6 +390,11 @@ main{position:relative;z-index:1}
   background:#fbf4e6;border:1px dashed var(--carrot);padding:6px 12px;border-radius:12px;margin-bottom:8px}
 .place-price b{color:var(--carrot);font-weight:900}
 .place-price .rev{font-weight:500;color:var(--ink-soft)}
+.place-dish{font-size:.9rem;color:var(--ink);margin-bottom:8px}
+.place-dish b{color:var(--royal);font-weight:800}
+.place-music{display:inline-block;font-size:.8rem;font-weight:800;color:#fff;margin:0 0 8px 8px;
+  background:linear-gradient(180deg,#ff8fc7,#e0489b);padding:4px 11px;border-radius:999px;
+  box-shadow:0 4px 12px rgba(224,72,155,.35)}
 
 /* ============================================================
    מפה + קשר
