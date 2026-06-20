@@ -505,9 +505,9 @@
   if (installBanner) installBanner.addEventListener("click", runInstall);
   if (installBtn) installBtn.addEventListener("click", (e) => { e.stopPropagation(); runInstall(); });
   if (installClose) installClose.addEventListener("click", (e) => {
-    e.stopPropagation();
-    if (installBanner) installBanner.hidden = true;
+    e.stopPropagation(); e.preventDefault();
     localStorage.setItem("cyprus2026_install_dismissed", "1");
+    if (installBanner) installBanner.remove();
   });
   window.addEventListener("appinstalled", () => { if (installBanner) installBanner.hidden = true; });
 
