@@ -84,7 +84,7 @@ const TRIP = {
   // נוסעים + כבודה + פרופיל אריזה
   passengers: [
     {
-      id: "yaniv", name: "יניב", full: "GOLTSHIAN / YANIV", role: "ראש השיירה 👑", emoji: "👨",
+      id: "yaniv", name: "יניב", full: "GOLTSHIAN / YANIV", role: "אבא של שון 🛡️", emoji: "👨",
       type: "adult", group: "א", checked: true, trolley: true,
       color: "#5b3fa6",
       packTitle: "ארגון, מסמכים וקצת קסמים",
@@ -182,7 +182,7 @@ const TRIP = {
       ],
     },
     {
-      id: "michal", name: "מיכל", full: "GOLTSHIAN / MICHAL", role: "בת המשפחה 💫", emoji: "👩",
+      id: "michal", name: "מיכל", full: "GOLTSHIAN / MICHAL", role: "אם המשפחה 👑", emoji: "👩",
       type: "adult", group: "ג", checked: true, trolley: true,
       color: "#2bb3c0",
       packTitle: "קלילות וחופש",
@@ -198,7 +198,7 @@ const TRIP = {
       ],
     },
     {
-      id: "herzel", name: "הרצל", full: "GOLTSHIAN / HERZEL", role: "בן המשפחה 🎩", emoji: "👨",
+      id: "herzel", name: "הרצל", full: "GOLTSHIAN / HERZEL", role: "אב המשפחה 👑", emoji: "👨",
       type: "adult", group: "ג", checked: true, trolley: true,
       color: "#ff8a3d",
       packTitle: "רגוע ומוכן לכל",
