@@ -32,8 +32,8 @@ python3 -m http.server 8000
 3. ‏Branch: `main`, Folder: `/ (root)` → Save
 4. כעבור דקה האתר יהיה זמין בכתובת: `https://yanivgoltshian.github.io/familiyTrip/`
 
-**אפשרות ב' — GitHub Actions:**
-הקובץ `.github/workflows/deploy-pages.yml` כבר כלול. תחת Settings → Pages → Source בחרו **GitHub Actions**. כל push ל-`main` יפרוס אוטומטית.
+**אפשרות ב' — GitHub Actions (לא חובה):**
+מי שמעדיף פריסה אוטומטית ב-CI יכול להוסיף workflow של GitHub Actions שמעלה את תיקיית הריפו ל-Pages. אפשרות א' לבדה מספיקה לאתר סטטי כזה — אין צורך בקובץ workflow.
 
 > הקובץ `.nojekyll` כלול כדי ש-GitHub Pages יגיש את הקבצים כמו שהם.
 
