@@ -379,7 +379,16 @@ main{position:relative;z-index:1}
   background:#fff;border:1.5px solid var(--purple)}
 .place-link.taxi{color:#fff;background:linear-gradient(180deg,#34c759,#1f9d45);border-color:#1f9d45;
   box-shadow:0 6px 14px rgba(31,157,69,.35)}
+.place-link.site{color:#fff;background:linear-gradient(180deg,#7b5cff,#5a37e0);border-color:#5a37e0;
+  box-shadow:0 6px 14px rgba(90,55,224,.3)}
 .place-link:active{transform:scale(.97)}
+.place-rating{display:inline-block;font-size:.84rem;font-weight:800;color:#b8860b;letter-spacing:1px;
+  background:rgba(255,200,40,.16);border:1px solid rgba(212,160,23,.35);padding:3px 11px;border-radius:999px;margin:0 0 8px 6px}
+.place-rating .rev{font-weight:600;color:var(--ink-soft);letter-spacing:0}
+.place-price{display:inline-flex;align-items:center;gap:5px;font-size:.92rem;color:var(--ink);font-weight:600;
+  background:#fbf4e6;border:1px dashed var(--carrot);padding:6px 12px;border-radius:12px;margin-bottom:8px}
+.place-price b{color:var(--carrot);font-weight:900}
+.place-price .rev{font-weight:500;color:var(--ink-soft)}
 
 /* ============================================================
    מפה + קשר

@@ -236,15 +236,25 @@
      סביבה — מסעדות / אטרקציות / שווקים
      ============================================================ */
   const exContent = $("#exploreContent");
+  function ratingBadge(r) {
+    if (!r.rating) return "";
+    const stars = "★".repeat(Math.round(r.rating)) + "☆".repeat(5 - Math.round(r.rating));
+    return `<span class="place-rating" title="דירוג Google">${stars} ${r.rating}${r.reviews ? ` <span class="rev">(${r.reviews})</span>` : ""}</span>`;
+  }
   function renderRest() {
     exContent.innerHTML = TRIP.restaurants.map(r => `
       <div class="place reveal in">
         <div class="place-top"><span class="place-emoji">${r.emoji}</span>
           <div><div class="place-name">${r.he}</div><div class="place-he">${r.name}</div></div></div>
+        ${ratingBadge(r)}
         <span class="place-walk">🚶 ${r.walk}</span>
-        <div class="place-cuisine">${r.cuisine} · ${r.price}</div>
+        <div class="place-cuisine">${r.cuisine}</div>
+        ${r.mainNis ? `<div class="place-price">💰 כ-<b>₪${r.mainNis}</b> למנה עיקרית <span class="rev">(${r.price})</span></div>` : ""}
         <ul class="place-menu">${r.menu.map(m => `<li>${m}</li>`).join("")}</ul>
-        <a class="place-link" href="${r.mapUrl}" target="_blank" rel="noopener">📍 לניווט ↗</a>
+        <div class="place-links">
+          <a class="place-link" href="${r.mapUrl}" target="_blank" rel="noopener">📍 לניווט ↗</a>
+          ${r.web ? `<a class="place-link site" href="${r.web}" target="_blank" rel="noopener">🌐 אתר / ביקורות ↗</a>` : ""}
+        </div>
       </div>`).join("");
   }
   function renderAttr() {
@@ -253,11 +263,14 @@
       <div class="place reveal in">
         <div class="place-top"><span class="place-emoji">${a.emoji}</span>
           <div><div class="place-name">${a.name}</div></div></div>
+        ${ratingBadge(a)}
         <span class="place-tag">${a.tag}</span>
         <span class="place-walk">🚗 ${a.dist}${a.stroller ? " · ידידותי לעגלה 👶" : ""}</span>
+        ${a.priceNis ? `<div class="place-price">🎟️ <b>${a.priceNis}</b></div>` : ""}
         <div class="place-cuisine">${a.text}</div>
         <div class="place-links">
           <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=${a.lat},${a.lon}" target="_blank" rel="noopener">📍 ניווט ↗</a>
+          ${a.web ? `<a class="place-link site" href="${a.web}" target="_blank" rel="noopener">🌐 אתר / ביקורות ↗</a>` : ""}
           ${tx ? `<a class="place-link taxi" href="${tx}" target="_blank" rel="noopener">🚕 מונית</a>` : ""}
         </div>
       </div>`).join("");
