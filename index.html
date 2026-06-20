@@ -2,15 +2,24 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#7c3aed" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥕</text></svg>" />
-  <title>החופשה שלנו בקפריסין · אוגוסט 2026 🥕</title>
-  <meta name="description" content="אתר החופשה שלנו ללרנקה, קפריסין — ספירה לאחור, טיסות, כבודה, רשימות אריזה, המלצות ומפה חיה." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#2a1a5e" />
+  <meta name="description" content="ספר האגדות של המשפחה — חופשת לרנקה, קפריסין אוגוסט 2026. ספירה לאחור, טיסות, כבודה, רשימות אריזה, המלון, המלצות ומפה חיה." />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="קפריסין 2026" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏰</text></svg>" />
+
+  <title>ספר האגדות של המשפחה · קפריסין 2026 🏰</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Suez+One&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Frank+Ruhl+Libre:wght@500;700;900&family=Suez+One&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Leaflet (מפה) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -19,7 +28,7 @@
 </head>
 <body>
 
-  <!-- דמויות אגדה (אליעזר והגזר) — סְפְרַייט נסתר -->
+  <!-- דמויות אגדה (אליעזר והגזר) + טירה — סְפְרַייט נסתר -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <symbol id="ch-carrot" viewBox="0 0 120 170">
@@ -109,13 +118,69 @@
         <circle cx="64" cy="39" r="2.2" fill="#2a2a2a"/>
         <circle cx="71" cy="44" r="2.2" fill="#ff8aa0"/>
       </symbol>
+      <symbol id="ch-castle" viewBox="0 0 220 200">
+        <!-- מגדלים אחוריים -->
+        <rect x="26" y="78" width="36" height="116" fill="#e7c46a"/>
+        <rect x="158" y="78" width="36" height="116" fill="#e7c46a"/>
+        <g fill="#d9b152"><rect x="26" y="74" width="9" height="9"/><rect x="40" y="74" width="9" height="9"/><rect x="54" y="74" width="8" height="9"/>
+          <rect x="158" y="74" width="9" height="9"/><rect x="172" y="74" width="9" height="9"/><rect x="186" y="74" width="8" height="9"/></g>
+        <path d="M22 74 L44 38 L66 74 Z" fill="#7c4ddb"/>
+        <path d="M154 74 L176 38 L198 74 Z" fill="#7c4ddb"/>
+        <!-- מצודה מרכזית -->
+        <rect x="74" y="58" width="72" height="136" fill="#f3d488"/>
+        <g fill="#e3bf63"><rect x="74" y="52" width="11" height="10"/><rect x="92" y="52" width="11" height="10"/><rect x="110" y="52" width="11" height="10"/><rect x="128" y="52" width="11" height="10"/></g>
+        <path d="M68 56 L110 14 L152 56 Z" fill="#6d28d9"/>
+        <!-- חלונות -->
+        <rect x="92" y="74" width="14" height="22" rx="7" fill="#5b3a86"/>
+        <rect x="114" y="74" width="14" height="22" rx="7" fill="#5b3a86"/>
+        <circle cx="110" cy="116" r="10" fill="#5b3a86"/>
+        <!-- שער -->
+        <path d="M94 194 L94 146 Q110 128 126 146 L126 194 Z" fill="#5b3a86"/>
+        <path d="M110 146 L110 194 M98 152 L98 188 M122 152 L122 188" stroke="#7c4ddb" stroke-width="2" opacity=".6"/>
+        <!-- דגלונים -->
+        <g stroke="#caa23f" stroke-width="2"><line x1="44" y1="38" x2="44" y2="22"/><line x1="110" y1="14" x2="110" y2="0"/><line x1="176" y1="38" x2="176" y2="22"/></g>
+        <path d="M44 22 L60 27 L44 32 Z" fill="#ff5e8a"/>
+        <path d="M110 0 L128 6 L110 12 Z" fill="#ffd24a"/>
+        <path d="M176 22 L192 27 L176 32 Z" fill="#ff5e8a"/>
+      </symbol>
     </defs>
   </svg>
+
+  <!-- ====== כריכת הספר ====== -->
+  <div class="book-cover" id="bookCover">
+    <div class="bc-stage">
+      <div class="bc-book">
+        <span class="bc-spark p1">✨</span><span class="bc-spark p2">⭐</span><span class="bc-spark p3">🌟</span><span class="bc-spark p4">✨</span>
+        <div class="bc-frame">
+          <div class="bc-emblem"><svg viewBox="0 0 220 200"><use href="#ch-castle"/></svg></div>
+          <div class="bc-kicker">סֵפֶר הָאַגָּדוֹת שֶׁל הַמִּשְׁפָּחָה</div>
+          <h1 class="bc-title">הַחֻפְשָׁה הַגְּדוֹלָה<br/>בְּקַפְּרִיסִין</h1>
+          <div class="bc-sub">לַרְנָקָה · אוֹגוּסְט 2026</div>
+          <div class="bc-cast">🥕 🏰 🌊 ☀️ 🐫</div>
+          <button class="bc-open" id="openBookBtn">✦ פִּתְחוּ אֶת הַסֵּפֶר ✦</button>
+          <p class="bc-hint">הקליקו כדי שהאגדה תתחיל</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== באנר התקנה (PWA) ====== -->
+  <div class="install-banner" id="installBanner" hidden>
+    <span class="ib-ic">🏰</span>
+    <div class="ib-txt"><b>התקינו את האפליקציה</b><span>גישה מהירה מהמסך הבית — בלי חנות, בלי הורדות</span></div>
+    <button class="ib-btn" id="installBtn">התקן</button>
+    <button class="ib-x" id="installClose" aria-label="סגור">✕</button>
+  </div>
+  <div class="ios-hint" id="iosInstallHint" hidden>
+    <button class="ios-x" id="iosHintClose" aria-label="סגור">✕</button>
+    <span>📲 להתקנה על האייפון: הקישו על <b>שיתוף</b> ⬆️ ואז «<b>הוסף למסך הבית</b>» ➕</span>
+  </div>
 
   <!-- רקע אגדה מכושף -->
   <div class="story-bg" aria-hidden="true">
     <div class="sun-glow"></div>
     <div class="stars"></div>
+    <div class="bg-castle"><svg viewBox="0 0 220 200"><use href="#ch-castle"/></svg></div>
     <div class="hill hill1"></div>
     <div class="hill hill2"></div>
     <span class="bg-spark b1">✨</span>
@@ -125,15 +190,15 @@
 
   <!-- ניווט -->
   <nav class="navbar" id="navbar">
-    <a href="#hero" class="nav-logo">🥕 קפריסין 2026</a>
+    <a href="#hero" class="nav-logo">🏰 קפריסין 2026</a>
     <button class="nav-toggle" id="navToggle" aria-label="תפריט">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="#countdown">ספירה לאחור</a>
+      <a href="#countdown">ספירה</a>
       <a href="#flights">טיסות</a>
       <a href="#baggage">כבודה</a>
       <a href="#packing">אריזה</a>
-      <a href="#hotel">המלון</a>
-      <a href="#explore">סביבה</a>
+      <a href="#hotel">הטירה</a>
+      <a href="#explore">הממלכה</a>
       <a href="#map">מפה חיה</a>
       <a href="#contact">קשר</a>
     </div>
@@ -145,11 +210,12 @@
       <span class="spark s1">✨</span><span class="spark s2">⭐</span><span class="spark s3">✨</span><span class="spark s4">🌟</span>
     </div>
     <div class="hero-inner">
-      <div class="hero-badge">🪄 עוד רגע יוצאים להרפתקה</div>
-      <h1 class="hero-title" id="heroTitle">החופשה שלנו בקפריסין</h1>
+      <div class="hero-badge">🪄 הָאַגָּדָה מַתְחִילָה</div>
+      <h1 class="hero-title" id="heroTitle">ספר האגדות של המשפחה</h1>
       <p class="hero-sub" id="heroSub">לרנקה · אוגוסט 2026 · אגדה אחת גדולה של כולנו</p>
+      <p class="hero-tale">הָיֹה הָיְתָה מִשְׁפָּחָה גְּדוֹלָה וַחֲבֵרָה אֲהוּבָה, שֶׁאָרְזוּ אֶת חֲלוֹמוֹתֵיהֶם וְיָצְאוּ אֶל מֵעֵבֶר לַיָּם — אֶל אִי שֶׁל שֶׁמֶשׁ, זָהָב וּמַיִם כְּחֻלִּים.</p>
       <div class="hero-flag">🥕 🇨🇾 🏖️ ✨ 🐫 🦩</div>
-      <a href="#countdown" class="hero-cta">בואו נתחיל לספור! ↓</a>
+      <a href="#countdown" class="hero-cta">שֶׁהָאַגָּדָה תַּתְחִיל! ↓</a>
     </div>
     <svg class="hero-carrot" viewBox="0 0 120 170" aria-hidden="true"><use href="#ch-carrot"/></svg>
   </header>
@@ -167,14 +233,18 @@
       <use href="#ch-cat" x="312" y="160" width="80" height="80"/>
       <use href="#ch-mouse" x="216" y="172" width="75" height="66"/>
     </svg>
-    <p class="band-cap">כשכּוּלָּם מוֹשְׁכִים יַחַד — אֲפִילוּ גֶּזֶר עֲנָק זָז! 🥕 בְּדִיוּק כְּמוֹ בְּ״אֱלִיעֶזֶר וְהַגֶּזֶר״</p>
+    <p class="band-cap">כְּשֶׁכֻּלָּם מוֹשְׁכִים יַחַד — אֲפִילוּ גֶּזֶר עֲנָק זָז! 🥕 בְּדִיוּק כְּמוֹ בְּ״אֱלִיעֶזֶר וְהַגֶּזֶר״</p>
   </div>
 
   <main>
-    <!-- ספירה לאחור -->
-    <section class="section" id="countdown">
-      <h2 class="section-title">⏳ הספירה לאחור לחופשה</h2>
-      <p class="section-lead">כמה זמן נשאר עד שממריאים?</p>
+    <!-- פרק ראשון: ספירה לאחור -->
+    <section class="section chapter" id="countdown">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק רִאשׁוֹן ✦</span>
+        <h2 class="section-title">⏳ הַסְּפִירָה הַמְּכֻשֶּׁפֶת</h2>
+        <p class="chapter-tale">בְּכָל לַיְלָה נוֹשֵׁר כּוֹכָב אֶחָד, וְהַסְּפִירָה הוֹלֶכֶת וּמִתְקַצֶּרֶת. כַּמָּה עוֹד עַד שֶׁנַּמְרִיא אֶל הָאֲגַדָּה?</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <div class="countdown-grid" id="countdownGrid">
         <div class="cd-box"><span class="cd-num" id="cdDays">--</span><span class="cd-label">ימים</span></div>
         <div class="cd-box"><span class="cd-num" id="cdHours">--</span><span class="cd-label">שעות</span></div>
@@ -184,51 +254,80 @@
       <div class="countdown-msg" id="countdownMsg"></div>
     </section>
 
-    <!-- טיסות -->
-    <section class="section alt" id="flights">
-      <h2 class="section-title">✈️ הטיסות שלנו</h2>
+    <!-- פרק שני: טיסות -->
+    <section class="section alt chapter" id="flights">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק שֵׁנִי ✦</span>
+        <h2 class="section-title">✈️ מֶרְכֶּבֶת הַשָּׁמַיִם</h2>
+        <p class="chapter-tale">מֶרְכָּבָה כְּסוּפַת כְּנָפַיִם תִּשָּׂא אוֹתָנוּ מֵעַל הַגַּלִּים, יָשָׁר אֶל אִי הַשֶּׁמֶשׁ. הִנֵּה הַשָּׁעָה וְהַשַּׁעַר.</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <p class="section-lead">עדכונים חיים, מזג אוויר וספירה לכל טיסה · חברת TUS Airways</p>
       <div class="cards" id="flightsContainer"></div>
       <div class="checkin-reminder" id="checkinReminder"></div>
     </section>
 
-    <!-- כבודה -->
-    <section class="section" id="baggage">
-      <h2 class="section-title">🧳 הכבודה — מה מותר לקחת</h2>
-      <p class="section-lead">הכללים של TUS Airways לכל נוסע</p>
+    <!-- פרק שלישי: כבודה -->
+    <section class="section chapter" id="baggage">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק שְׁלִישִׁי ✦</span>
+        <h2 class="section-title">🧳 תֵּבוֹת הָאוֹצָר</h2>
+        <p class="chapter-tale">כָּל גִּבּוֹר אוֹרֵז אֶת תֵּבַת הָאוֹצָר שֶׁלּוֹ. מָה מֻתָּר לָקַחַת לַדֶּרֶךְ? הִנֵּה חֻקֵּי הַמַּמְלָכָה הַמְּעוֹפֶפֶת.</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <div class="baggage-rules" id="baggageRules"></div>
       <div class="passenger-grid" id="passengerGrid"></div>
     </section>
 
-    <!-- אריזה -->
-    <section class="section alt" id="packing">
-      <h2 class="section-title">🎒 רשימת אריזה אישית</h2>
+    <!-- פרק רביעי: אריזה -->
+    <section class="section alt chapter" id="packing">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק רְבִיעִי ✦</span>
+        <h2 class="section-title">🎒 יַלְקוּט הַקְּסָמִים</h2>
+        <p class="chapter-tale">לְכָל אֶחָד יַלְקוּט מִשֶּׁלּוֹ, וּבוֹ בְּדִיוּק מַה שֶּׁצָּרִיךְ. נְסַמֵּן ✓ — וְלֹא נִשְׁכַּח כְּלוּם!</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <p class="section-lead">בחרו נוסע וקבלו רשימה מותאמת — סמנו ✓ ככל שאורזים!</p>
       <div class="packing-tabs" id="packingTabs"></div>
       <div class="packing-panel" id="packingPanel"></div>
       <div class="tips-grid" id="tipsGrid"></div>
     </section>
 
-    <!-- מלון -->
-    <section class="section" id="hotel">
-      <h2 class="section-title">🏨 המלון שלנו</h2>
+    <!-- פרק חמישי: המלון -->
+    <section class="section chapter" id="hotel">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק חֲמִישִׁי ✦</span>
+        <h2 class="section-title">🏰 הַטִּירָה שֶׁעַל הַחוֹף</h2>
+        <p class="chapter-tale">וְשָׁם, עַל חוֹף שֶׁל זָהָב, מְחַכָּה לָנוּ טִירָה עִם בְּרֵכוֹת נוֹצְצוֹת, גַּנֵּי דְּקָלִים וְחֶדֶר חֲלוֹמוֹת לְכָל מִשְׁפָּחָה.</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <div class="hotel-wrap" id="hotelWrap"></div>
     </section>
 
-    <!-- סביבה: מסעדות, אטרקציות, שווקים -->
-    <section class="section alt" id="explore">
-      <h2 class="section-title">🗺️ מה יש מסביב</h2>
+    <!-- פרק שישי: סביבה -->
+    <section class="section alt chapter" id="explore">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק שִׁשִּׁי ✦</span>
+        <h2 class="section-title">🗺️ הַמַּמְלָכָה שֶׁמִּסָּבִיב</h2>
+        <p class="chapter-tale">סְבִיב הַטִּירָה נִפְרֶשֶׂת מַמְלָכָה שֶׁל טְעָמִים, פְּלָאוֹת וּשְׁוָקִים תּוֹסְסִים — בּוֹאוּ נְגַלֶּה אוֹתָהּ יַחַד.</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <div class="explore-tabs">
         <button class="ex-tab active" data-tab="rest">🍽️ מסעדות</button>
         <button class="ex-tab" data-tab="attr">🎡 אטרקציות</button>
-        <button class="ex-tab" data-tab="mark">🛒 שווקים</button>
+        <button class="ex-tab" data-tab="mark">🛍️ שווקים וקניות</button>
       </div>
       <div class="explore-content" id="exploreContent"></div>
     </section>
 
-    <!-- מפה חיה -->
-    <section class="section" id="map">
-      <h2 class="section-title">📍 המפה החיה שלנו</h2>
+    <!-- פרק שביעי: מפה חיה -->
+    <section class="section chapter" id="map">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק שְׁבִיעִי ✦</span>
+        <h2 class="section-title">📍 הַמַּפָּה הַמְּכֻשֶּׁפֶת</h2>
+        <p class="chapter-tale">מַפָּה קְסוּמָה תַּרְאֶה הֵיכָן כָּל אֶחָד מֵאִתָּנוּ — כָּךְ אַף אֶחָד לֹא יֹאבַד בָּאֲגַדָּה.</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <p class="section-lead">שתפו מיקום כדי לראות אחד את השני על המפה בזמן אמת</p>
       <div class="map-controls" id="mapControls">
         <input type="text" id="meName" placeholder="השם שלי על המפה" maxlength="20" />
@@ -240,9 +339,14 @@
       <p class="map-note">🔒 פרטיות: המיקום משותף רק עם מי שמחזיק בקישור הזה, דרך חדר פרטי שלנו. הנתונים לא נשמרים בשרת.</p>
     </section>
 
-    <!-- קשר -->
-    <section class="section alt" id="contact">
-      <h2 class="section-title">📞 איש הקשר שלנו</h2>
+    <!-- פרק אחרון: קשר -->
+    <section class="section alt chapter" id="contact">
+      <div class="chapter-head reveal">
+        <span class="chapter-eyebrow">✦ פֶּרֶק אַחֲרוֹן ✦</span>
+        <h2 class="section-title">📞 הַשְּׁלִיחָה הַנֶּאֱמָנָה</h2>
+        <p class="chapter-tale">וּמֵעֵבֶר לַיָּם דּוֹאֶגֶת לַכֹּל דִּיאָנָה — הַשְּׁלִיחָה שֶׁסָּגְרָה אֶת הַחֲבִילָה הַמֻּשְׁלֶמֶת.</p>
+        <div class="ornament" aria-hidden="true">❧&nbsp;✦&nbsp;❧</div>
+      </div>
       <div class="contact-card" id="contactCard"></div>
     </section>
   </main>
@@ -257,8 +361,9 @@
       <svg viewBox="0 0 80 70"><use href="#ch-mouse"/></svg>
       <svg viewBox="0 0 120 170"><use href="#ch-carrot"/></svg>
     </div>
+    <p class="footer-tale">וְכֻלָּם חִכּוּ בְּקֹצֶר רוּחַ לַיּוֹם בּוֹ תַּתְחִיל הָאֲגַדָּה… סוֹף טוֹב — הַכֹּל טוֹב! 🥕✨</p>
     <p>נבנה באהבה לכל החבר'ה · חופשת קפריסין אוגוסט 2026</p>
-    <p class="footer-small">יהיה אגדה. בואו נתכונן! 🪄💛</p>
+    <p class="footer-small">יהיה אגדה. בואו נתכונן! 🏰💛</p>
   </footer>
 
   <!-- כפתור קונפטי צף -->

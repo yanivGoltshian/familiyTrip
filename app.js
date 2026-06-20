@@ -126,7 +126,8 @@
      ============================================================ */
   const br = TRIP.baggageRules;
   $("#baggageRules").innerHTML = `
-    <div class="brule"><div class="br-ic">🧳</div><div class="br-t">מזוודה</div><div class="br-w">${br.checked.weight}</div><div class="br-d">${br.checked.note}</div></div>
+    ${br.reassure ? `<div class="brule baggage-yes">🎉 ${br.reassure}</div>` : ""}
+    <div class="brule"><div class="br-ic">🧳</div><div class="br-t">מזוודה</div><div class="br-w">${br.checked.weight}</div><div class="br-d">${br.checked.dims} · ${br.checked.note}</div></div>
     <div class="brule"><div class="br-ic">🎒</div><div class="br-t">טרולי</div><div class="br-w">${br.trolley.weight}</div><div class="br-d">${br.trolley.dims}</div></div>
     <div class="brule"><div class="br-ic">👜</div><div class="br-t">תיק אישי</div><div class="br-w">${br.personal.weight}</div><div class="br-d">${br.personal.dims}</div></div>
     <div class="brule"><div class="br-ic">👶</div><div class="br-t">תיק תינוק</div><div class="br-w">${br.infant.weight}</div><div class="br-d">${br.infant.dims}</div></div>
@@ -208,7 +209,7 @@
   const h = TRIP.hotel;
   $("#hotelWrap").innerHTML = `
     <div class="hotel-gallery">
-      ${h.images.map(src => `<img src="${src}" alt="${h.nameHe}" loading="lazy" onerror="this.style.display='none'">`).join("")}
+      ${h.images.map(im => `<figure class="hg-fig"><img src="${im.src}" alt="${im.cap || h.nameHe}" loading="lazy" onerror="this.closest('.hg-fig').style.display='none'"><figcaption>${im.cap || ""}</figcaption></figure>`).join("")}
     </div>
     <div class="hotel-info">
       <div class="hotel-name">${h.nameHe}</div>
@@ -247,6 +248,7 @@
       </div>`).join("");
   }
   function renderAttr() {
+    const tx = TRIP.transport ? TRIP.transport.taxiUrl : "";
     exContent.innerHTML = TRIP.attractions.map(a => `
       <div class="place reveal in">
         <div class="place-top"><span class="place-emoji">${a.emoji}</span>
@@ -254,17 +256,26 @@
         <span class="place-tag">${a.tag}</span>
         <span class="place-walk">🚗 ${a.dist}${a.stroller ? " · ידידותי לעגלה 👶" : ""}</span>
         <div class="place-cuisine">${a.text}</div>
-        <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=${a.lat},${a.lon}" target="_blank" rel="noopener">📍 לניווט ↗</a>
+        <div class="place-links">
+          <a class="place-link" href="https://www.google.com/maps/search/?api=1&query=${a.lat},${a.lon}" target="_blank" rel="noopener">📍 ניווט ↗</a>
+          ${tx ? `<a class="place-link taxi" href="${tx}" target="_blank" rel="noopener">🚕 מונית</a>` : ""}
+        </div>
       </div>`).join("");
   }
   function renderMark() {
-    exContent.innerHTML = TRIP.markets.map(m => `
+    const tx = TRIP.transport ? TRIP.transport.taxiUrl : "";
+    const note = TRIP.transport ? `<div class="taxi-note">🚕 ${TRIP.transport.note}</div>` : "";
+    exContent.innerHTML = note + TRIP.markets.map(m => `
       <div class="place reveal in">
         <div class="place-top"><span class="place-emoji">${m.emoji}</span>
-          <div><div class="place-name">${m.name}</div></div></div>
-        <span class="place-tag">${m.tag}</span>
+          <div><div class="place-name">${m.name}</div>${m.en ? `<div class="place-he">${m.en}</div>` : ""}</div></div>
+        <span class="place-tag">${m.kind ? m.kind + " · " : ""}${m.tag}</span>
+        <span class="place-walk">🚕 ${m.taxi}${m.walk ? " · 🚶 " + m.walk : ""} <span class="from-hotel">מהמלון</span></span>
         <div class="place-cuisine">${m.text}</div>
-        <a class="place-link" href="${m.mapUrl}" target="_blank" rel="noopener">📍 לניווט ↗</a>
+        <div class="place-links">
+          <a class="place-link" href="${m.mapUrl}" target="_blank" rel="noopener">📍 ניווט ↗</a>
+          ${tx ? `<a class="place-link taxi" href="${tx}" target="_blank" rel="noopener">🚕 הזמן מונית</a>` : ""}
+        </div>
       </div>`).join("");
   }
   $$(".ex-tab").forEach(tab => tab.addEventListener("click", () => {
@@ -415,8 +426,81 @@
     }
   }
   $("#confettiBtn").addEventListener("click", burst);
-  // הפתעה קטנה בכניסה
-  setTimeout(burst, 900);
+
+  /* ============================================================
+     פתיחת הספר · התקנת אפליקציה (PWA) · פרלקסה
+     ============================================================ */
+  // כריכת הספר — לחיצה פותחת את האגדה
+  const cover = $("#bookCover"), openBtn = $("#openBookBtn");
+  if (cover && openBtn) {
+    if (sessionStorage.getItem("cyprus2026_opened")) {
+      cover.remove();
+    } else {
+      document.body.classList.add("locked");
+      openBtn.addEventListener("click", () => {
+        cover.classList.add("open");
+        document.body.classList.remove("locked");
+        sessionStorage.setItem("cyprus2026_opened", "1");
+        burst();
+        setTimeout(() => cover.remove(), 1300);
+      });
+    }
+  } else {
+    setTimeout(burst, 900);
+  }
+
+  // פרלקסה עדינה לרקע האגדה
+  const storyBg = $(".story-bg");
+  if (storyBg) {
+    let ticking = false;
+    window.addEventListener("scroll", () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => {
+        storyBg.style.transform = "translateY(" + (window.scrollY * 0.16) + "px)";
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  // התקנת אפליקציה (PWA)
+  let deferredPrompt = null;
+  const installBanner = $("#installBanner"), installBtn = $("#installBtn"),
+        installClose = $("#installClose"), iosHint = $("#iosInstallHint");
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  const installDismissed = localStorage.getItem("cyprus2026_install_dismissed");
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault(); deferredPrompt = e;
+    if (installBanner && !installDismissed && !isStandalone) installBanner.hidden = false;
+  });
+  if (installBtn) installBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    try { await deferredPrompt.userChoice; } catch (e) {}
+    deferredPrompt = null;
+    if (installBanner) installBanner.hidden = true;
+  });
+  if (installClose) installClose.addEventListener("click", () => {
+    if (installBanner) installBanner.hidden = true;
+    localStorage.setItem("cyprus2026_install_dismissed", "1");
+  });
+  window.addEventListener("appinstalled", () => { if (installBanner) installBanner.hidden = true; });
+  // iOS Safari — אין beforeinstallprompt, מציגים רמז ידני
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
+  if (isIOS && isSafari && !isStandalone && !installDismissed && iosHint) {
+    setTimeout(() => { iosHint.hidden = false; }, 2600);
+    const ic = $("#iosHintClose");
+    if (ic) ic.addEventListener("click", () => {
+      iosHint.hidden = true; localStorage.setItem("cyprus2026_install_dismissed", "1");
+    });
+  }
+
+  // רישום Service Worker (אופליין + התקנה)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
 
   /* ---------- עזר: תאריך עברי ---------- */
   function formatHeDate(iso) {

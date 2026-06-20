@@ -1,345 +1,460 @@
 /* ============================================================
-   חופשת קפריסין 2026 — ערכת "אגדת דיסני" בהשראת אֱלִיעֶזֶר וְהַגֶּזֶר
+   ספר האגדות של המשפחה · קפריסין 2026
+   עיצוב: אגדת דיסני מוארת · Mobile-first · RTL
    ============================================================ */
+
 :root{
-  --plum:#3a2a4d; --plum-soft:#6b5a7e;
-  --purple:#7c3aed; --purple-deep:#5b21b6; --magic:#6d5dfc;
-  --gold:#f5b301; --gold-soft:#ffd76a;
-  --carrot:#ff8a3d; --carrot-deep:#ef6c1a;
-  --leaf:#4faf4a; --leaf-deep:#3d8c39;
-  --pink:#ff86b8; --pink-deep:#ec4899;
-  --cream:#fffaf0; --parchment:#fff5de; --parch-brd:#f0d9a8;
-  --sky1:#e7d8fb; --sky2:#f3e7ff; --sky3:#fff1e2;
-  --white:#fff; --ok:#16a34a; --no:#e11d48;
-  --shadow:0 14px 34px rgba(91,33,182,.16);
-  --shadow-lg:0 26px 60px rgba(91,33,182,.26);
-  --radius:24px; --radius-sm:16px; --maxw:1120px;
-  --grad-magic:linear-gradient(135deg,#7c3aed,#6d5dfc 55%,#9b6dff);
-  --grad-gold:linear-gradient(135deg,#ffe08a,#f5b301);
-  --grad-carrot:linear-gradient(135deg,#ffac5e,#ef6c1a);
-  --font-title:'Suez One',serif;
-  --font-body:'Heebo',system-ui,sans-serif;
+  --ink:#2c1c52;
+  --ink-soft:#5a4a86;
+  --royal:#3b2a73;
+  --royal-deep:#1b1140;
+  --royal-2:#2a1a5e;
+  --purple:#7c4ddb;
+  --purple-lite:#a888ee;
+  --gold:#e9c46a;
+  --gold-deep:#c79a34;
+  --gold-glow:#ffe7a8;
+  --rose:#ff6f9c;
+  --teal:#27b3a3;
+  --carrot:#ff8a3d;
+  --parchment:#fbf2db;
+  --parchment-2:#f5e6c4;
+  --cream:#fffaf0;
+  --line:rgba(199,154,52,.38);
+  --shadow:0 14px 38px rgba(27,17,64,.20);
+  --shadow-soft:0 8px 22px rgba(27,17,64,.14);
+  --radius:22px;
+  --maxw:1120px;
+  --serif:"Frank Ruhl Libre","Suez One",Georgia,serif;
+  --display:"Suez One",serif;
+  --fun:"Fredoka","Heebo",sans-serif;
+  --body:"Heebo",system-ui,sans-serif;
 }
+
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{
-  font-family:var(--font-body); color:var(--plum); line-height:1.6;
-  background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 32%,var(--sky3) 100%) fixed;
-  overflow-x:hidden; min-height:100vh;
+  font-family:var(--body);
+  color:var(--ink);
+  line-height:1.65;
+  background:linear-gradient(180deg,#1b1140 0%,#2a1a5e 26%,#4b2f86 55%,#7a51b0 78%,#f3b97a 100%);
+  background-attachment:fixed;
+  overflow-x:hidden;
+  min-height:100vh;
 }
-h1,h2,h3,.hero-title,.section-title,.cd-num,.nav-logo{font-family:var(--font-title);letter-spacing:.2px}
-a{color:inherit;text-decoration:none}
+body.locked{overflow:hidden;height:100vh}
 img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+::selection{background:var(--gold);color:var(--royal-deep)}
 
-/* ---------- רקע אגדה מכושף ---------- */
-.story-bg{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-.sun-glow{
-  position:absolute;top:-16vh;inset-inline-end:-10vw;width:60vw;height:60vw;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,221,128,.85),rgba(255,221,128,.25) 40%,transparent 65%);
-  filter:blur(6px);animation:glow 9s ease-in-out infinite;
-}
-.stars{
-  position:absolute;inset:0;opacity:.7;
-  background-image:
-    radial-gradient(1.6px 1.6px at 30px 40px,#fff6cf 50%,transparent 51%),
-    radial-gradient(1.6px 1.6px at 130px 120px,#fff6cf 50%,transparent 51%),
-    radial-gradient(2.2px 2.2px at 200px 60px,#fff 50%,transparent 51%),
-    radial-gradient(1.4px 1.4px at 260px 170px,#ffe9a8 50%,transparent 51%),
-    radial-gradient(1.8px 1.8px at 80px 210px,#fff 50%,transparent 51%);
-  background-size:300px 300px;background-repeat:repeat;animation:twinkle 5s ease-in-out infinite;
-}
-.hill{position:absolute;left:-6%;width:112%;border-radius:46% 54% 0 0/100% 100% 0 0}
-.hill1{bottom:-7vh;height:24vh;background:linear-gradient(#80cc61,#5bb24a);opacity:.5}
-.hill2{bottom:-3vh;height:17vh;background:linear-gradient(#9bd77c,#74c257);opacity:.55}
-.bg-spark{position:absolute;font-size:20px;opacity:.8;animation:floatUp 11s linear infinite;filter:drop-shadow(0 1px 2px rgba(245,179,1,.4))}
-.bg-spark.b1{left:12%;bottom:-30px;animation-delay:0s}
-.bg-spark.b2{left:48%;bottom:-30px;animation-delay:3.5s;font-size:16px}
-.bg-spark.b3{left:80%;bottom:-30px;animation-delay:7s}
-@keyframes glow{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.08);opacity:1}}
-@keyframes twinkle{0%,100%{opacity:.4}50%{opacity:.85}}
-@keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.9}90%{opacity:.7}100%{transform:translateY(-108vh) rotate(160deg);opacity:0}}
+/* ============================================================
+   רקע אגדה מכושף
+   ============================================================ */
+.story-bg{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;will-change:transform}
+.sun-glow{position:absolute;top:-14%;left:50%;transform:translateX(-50%);width:520px;height:520px;
+  background:radial-gradient(circle,rgba(255,231,168,.5),rgba(255,231,168,0) 66%);filter:blur(6px)}
+.stars{position:absolute;inset:0;
+  background-image:radial-gradient(1.6px 1.6px at 12% 18%,#fff,transparent),
+    radial-gradient(1.4px 1.4px at 28% 32%,#fff,transparent),
+    radial-gradient(1.8px 1.8px at 47% 12%,#fff,transparent),
+    radial-gradient(1.3px 1.3px at 67% 26%,#fff,transparent),
+    radial-gradient(1.7px 1.7px at 82% 14%,#fff,transparent),
+    radial-gradient(1.4px 1.4px at 90% 36%,#fff,transparent),
+    radial-gradient(1.3px 1.3px at 58% 40%,#fff,transparent);
+  opacity:.55;animation:twinkle 5s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.35}50%{opacity:.8}}
+.bg-castle{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);width:min(78vw,540px);opacity:.16;
+  filter:drop-shadow(0 8px 18px rgba(0,0,0,.3))}
+.bg-castle svg{width:100%;height:auto}
+.hill{position:absolute;bottom:-2%;width:120%;height:230px;border-radius:50% 50% 0 0/100% 100% 0 0}
+.hill1{left:-12%;background:linear-gradient(180deg,#5bbf72,#3f9b54);opacity:.9}
+.hill2{right:-14%;background:linear-gradient(180deg,#7ed08c,#57b56c);opacity:.8;height:180px}
+.bg-spark{position:absolute;font-size:1.3rem;opacity:.8;animation:floaty 7s ease-in-out infinite}
+.bg-spark.b1{top:22%;left:12%}
+.bg-spark.b2{top:34%;right:14%;animation-delay:1.4s}
+.bg-spark.b3{top:54%;left:20%;animation-delay:2.6s}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(12deg)}}
 
-/* ---------- ניווט ---------- */
-.navbar{
-  position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-  gap:1rem;padding:.6rem clamp(1rem,4vw,2rem);
-  background:rgba(255,250,240,.82);backdrop-filter:blur(12px);
-  border-bottom:2px solid var(--parch-brd);box-shadow:0 6px 20px rgba(91,33,182,.08);
-}
-.nav-logo{font-size:1.3rem;color:var(--purple-deep)}
-.nav-links{display:flex;gap:.3rem;flex-wrap:wrap}
-.nav-links a{
-  padding:.4rem .7rem;border-radius:999px;font-weight:600;font-size:.95rem;color:var(--plum-soft);
-  transition:.2s;
-}
-.nav-links a:hover{background:var(--grad-magic);color:#fff;box-shadow:0 6px 16px rgba(124,58,237,.3)}
-.nav-toggle{display:none;background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--purple-deep)}
+/* ============================================================
+   כריכת הספר
+   ============================================================ */
+.book-cover{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:20px;
+  background:radial-gradient(120% 120% at 50% 0,#3a2570,#150c33 80%);
+  transition:opacity .9s ease,transform .9s ease,visibility .9s}
+.book-cover.open{opacity:0;transform:scale(1.12) rotateX(8deg);visibility:hidden;pointer-events:none}
+.bc-stage{perspective:1400px;width:100%;max-width:430px}
+.bc-book{position:relative;border-radius:18px;padding:30px 22px 34px;text-align:center;
+  background:
+    radial-gradient(140% 90% at 50% 0,rgba(255,231,168,.16),transparent 60%),
+    linear-gradient(160deg,#4a2f8e,#311c66 60%,#241349);
+  border:2px solid var(--gold-deep);
+  box-shadow:inset 0 0 0 6px rgba(233,196,106,.18),inset 0 0 60px rgba(0,0,0,.4),0 30px 70px rgba(0,0,0,.55);
+  animation:bookIn .8s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes bookIn{from{opacity:0;transform:translateY(26px) rotateX(14deg)}to{opacity:1;transform:none}}
+.bc-book::before{content:"";position:absolute;top:8px;bottom:8px;right:0;width:14px;border-radius:0 8px 8px 0;
+  background:linear-gradient(90deg,rgba(0,0,0,.35),transparent)}
+.bc-frame{border:1.5px solid rgba(233,196,106,.5);border-radius:12px;padding:26px 16px 24px;position:relative}
+.bc-emblem{width:120px;margin:0 auto 10px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.45))}
+.bc-emblem svg{width:100%;height:auto}
+.bc-kicker{font-family:var(--serif);color:var(--gold-glow);letter-spacing:.06em;font-size:.86rem;font-weight:700;margin-bottom:6px}
+.bc-title{font-family:var(--serif);color:#fff;font-weight:900;line-height:1.18;font-size:clamp(1.9rem,8vw,2.6rem);
+  text-shadow:0 2px 0 var(--gold-deep),0 12px 26px rgba(0,0,0,.5)}
+.bc-sub{color:var(--gold);font-family:var(--fun);font-weight:600;margin-top:8px;font-size:1.05rem}
+.bc-cast{font-size:1.5rem;margin:14px 0 6px;letter-spacing:.18em}
+.bc-open{margin-top:14px;display:inline-block;padding:14px 26px;border-radius:999px;font-family:var(--serif);font-weight:700;
+  font-size:1.05rem;color:var(--royal-deep);
+  background:linear-gradient(180deg,#ffe9b0,#e9c46a);border:1.5px solid #fff3d4;
+  box-shadow:0 10px 24px rgba(233,196,106,.45),inset 0 1px 0 #fff;animation:pulseGold 2.2s ease-in-out infinite}
+.bc-open:active{transform:scale(.96)}
+@keyframes pulseGold{0%,100%{box-shadow:0 10px 24px rgba(233,196,106,.4),inset 0 1px 0 #fff}50%{box-shadow:0 14px 34px rgba(233,196,106,.75),inset 0 1px 0 #fff}}
+.bc-hint{color:rgba(255,255,255,.7);font-size:.82rem;margin-top:12px}
+.bc-spark{position:absolute;font-size:1.2rem;animation:floaty 6s ease-in-out infinite;z-index:2}
+.bc-spark.p1{top:6%;right:10%}.bc-spark.p2{top:14%;left:8%;animation-delay:1s}
+.bc-spark.p3{bottom:12%;right:12%;animation-delay:2s}.bc-spark.p4{bottom:8%;left:10%;animation-delay:.6s}
 
-/* ---------- HERO ---------- */
-.hero{
-  position:relative;text-align:center;padding:clamp(3rem,9vw,6rem) 1.2rem clamp(3.5rem,8vw,5rem);
-  overflow:hidden;
-}
-.hero-inner{position:relative;z-index:2;max-width:840px;margin:0 auto}
-.hero-badge{
-  display:inline-block;background:var(--grad-gold);color:#6b4a00;font-weight:700;
-  padding:.45rem 1.1rem;border-radius:999px;font-size:.95rem;margin-bottom:1.1rem;
-  box-shadow:0 8px 20px rgba(245,179,1,.35);border:2px solid #fff;
-}
-.hero-title{
-  font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.05;color:var(--purple-deep);
-  text-shadow:0 3px 0 #fff,0 6px 18px rgba(124,58,237,.25);
-}
-.hero-sub{font-size:clamp(1.05rem,3vw,1.5rem);color:var(--plum-soft);margin-top:.7rem;font-weight:500}
-.hero-flag{font-size:clamp(1.6rem,5vw,2.4rem);margin:1rem 0 1.4rem;letter-spacing:.3rem}
-.hero-cta{
-  display:inline-block;background:var(--grad-magic);color:#fff;font-weight:700;font-size:1.1rem;
-  padding:.85rem 1.8rem;border-radius:999px;box-shadow:0 12px 28px rgba(124,58,237,.4);
-  border:2px solid #fff;transition:.2s;
-}
-.hero-cta:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 18px 36px rgba(124,58,237,.5)}
-.hero-magic{position:absolute;inset:0;z-index:1;pointer-events:none}
-.spark{position:absolute;font-size:1.6rem;opacity:.85;animation:sparkle 4s ease-in-out infinite}
-.spark.s1{top:18%;inset-inline-start:14%}
-.spark.s2{top:30%;inset-inline-end:16%;animation-delay:1s}
-.spark.s3{top:62%;inset-inline-start:22%;animation-delay:2s}
-.spark.s4{top:54%;inset-inline-end:24%;animation-delay:1.5s}
-@keyframes sparkle{0%,100%{transform:scale(.8) rotate(-8deg);opacity:.5}50%{transform:scale(1.15) rotate(8deg);opacity:1}}
-.hero-carrot{
-  position:absolute;bottom:-14px;inset-inline-start:5%;width:clamp(74px,11vw,140px);height:auto;z-index:2;
-  filter:drop-shadow(0 10px 16px rgba(91,33,182,.25));animation:bob 4.5s ease-in-out infinite;
-}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
+/* ============================================================
+   באנר התקנה (PWA)
+   ============================================================ */
+.install-banner{position:fixed;left:12px;right:12px;bottom:12px;z-index:900;
+  display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;
+  background:linear-gradient(160deg,#fffaf0,#f5e6c4);border:1.5px solid var(--gold-deep);
+  box-shadow:var(--shadow);animation:slideUp .5s ease both}
+@keyframes slideUp{from{transform:translateY(120%)}to{transform:none}}
+.ib-ic{font-size:1.7rem;flex:none}
+.ib-txt{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.ib-txt b{color:var(--royal);font-family:var(--serif);font-size:1rem}
+.ib-txt span{font-size:.8rem;color:var(--ink-soft)}
+.ib-btn{flex:none;padding:10px 18px;border-radius:999px;font-weight:800;color:#fff;
+  background:linear-gradient(180deg,#8a5be0,#6d28d9);box-shadow:0 6px 16px rgba(109,40,217,.4)}
+.ib-btn:active{transform:scale(.95)}
+.ib-x{flex:none;width:30px;height:30px;border-radius:50%;color:var(--ink-soft);font-size:1rem;background:rgba(0,0,0,.06)}
+.ios-hint{position:fixed;left:12px;right:12px;bottom:12px;z-index:900;display:flex;align-items:center;gap:10px;
+  padding:12px 40px 12px 14px;border-radius:16px;font-size:.9rem;color:#fff;
+  background:linear-gradient(160deg,#4a2f8e,#2a1a5e);border:1.5px solid var(--gold-deep);box-shadow:var(--shadow)}
+.ios-hint b{color:var(--gold-glow)}
+.ios-x{position:absolute;left:8px;top:8px;width:26px;height:26px;border-radius:50%;color:#fff;background:rgba(255,255,255,.15)}
 
-/* ---------- מופע "כולם מושכים יחד" ---------- */
-.story-band{max-width:var(--maxw);margin:-1.5rem auto .5rem;padding:.5rem 1.2rem 0;text-align:center}
-.story-band .scene{width:100%;height:auto;max-height:250px;filter:drop-shadow(0 12px 18px rgba(91,33,182,.16))}
-.band-cap{font-family:var(--font-title);color:var(--purple-deep);font-size:clamp(1rem,2.7vw,1.45rem);margin-top:.3rem}
+/* ============================================================
+   ניווט
+   ============================================================ */
+.navbar{position:sticky;top:0;z-index:500;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;padding:10px 16px;
+  background:linear-gradient(180deg,rgba(27,17,64,.96),rgba(43,26,94,.9));
+  backdrop-filter:blur(10px);border-bottom:1.5px solid var(--gold-deep);
+  box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.nav-logo{font-family:var(--serif);font-weight:900;color:var(--gold-glow);font-size:1.12rem;white-space:nowrap}
+.nav-toggle{font-size:1.5rem;color:var(--gold-glow);line-height:1;padding:4px 8px}
+.nav-links{display:none;position:absolute;top:100%;right:0;left:0;flex-direction:column;gap:2px;padding:8px;
+  background:linear-gradient(180deg,#241349,#2a1a5e);border-bottom:1.5px solid var(--gold-deep)}
+.nav-links.open{display:flex;animation:dropIn .25s ease}
+@keyframes dropIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.nav-links a{padding:12px 14px;border-radius:12px;color:#f0e7ff;font-weight:600}
+.nav-links a:active,.nav-links a:hover{background:rgba(233,196,106,.18);color:var(--gold-glow)}
 
-/* ---------- מבנה סקשנים ---------- */
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;text-align:center;padding:54px 20px 64px;overflow:hidden}
+.hero-magic .spark{position:absolute;font-size:1.5rem;animation:floaty 6s ease-in-out infinite}
+.spark.s1{top:14%;right:12%}.spark.s2{top:24%;left:10%;animation-delay:1s}
+.spark.s3{top:60%;right:16%;animation-delay:2s}.spark.s4{top:68%;left:14%;animation-delay:1.5s}
+.hero-inner{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.hero-badge{display:inline-block;padding:7px 18px;border-radius:999px;font-weight:700;font-size:.9rem;
+  color:var(--royal-deep);background:linear-gradient(180deg,#ffe9b0,#e9c46a);border:1.5px solid #fff3d4;
+  box-shadow:0 6px 16px rgba(233,196,106,.4)}
+.hero-title{font-family:var(--serif);font-weight:900;color:#fff;line-height:1.12;margin:16px 0 8px;
+  font-size:clamp(2rem,9vw,3.4rem);text-shadow:0 2px 0 var(--gold-deep),0 14px 30px rgba(0,0,0,.45)}
+.hero-sub{color:var(--gold-glow);font-family:var(--fun);font-weight:600;font-size:clamp(1rem,4.4vw,1.3rem)}
+.hero-tale{color:rgba(255,255,255,.92);font-family:var(--serif);font-size:clamp(1rem,4.2vw,1.18rem);
+  line-height:1.8;margin:16px auto 4px;max-width:560px;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.hero-flag{font-size:1.7rem;letter-spacing:.12em;margin:16px 0 20px}
+.hero-cta{display:inline-block;padding:15px 32px;border-radius:999px;font-family:var(--serif);font-weight:700;font-size:1.1rem;
+  color:#fff;background:linear-gradient(180deg,#8a5be0,#6d28d9);
+  box-shadow:0 12px 28px rgba(109,40,217,.5),inset 0 1px 0 rgba(255,255,255,.3);animation:bob 2.6s ease-in-out infinite}
+.hero-cta:active{transform:scale(.96)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.hero-carrot{position:absolute;bottom:-6px;left:6%;width:74px;opacity:.9;animation:floaty 5s ease-in-out infinite;z-index:1}
+
+/* ============================================================
+   רצועת אליעזר והגזר
+   ============================================================ */
+.story-band{max-width:var(--maxw);margin:0 auto;padding:8px 16px 22px;text-align:center}
+.story-band .scene{width:100%;height:auto;filter:drop-shadow(0 10px 20px rgba(0,0,0,.25))}
+.band-cap{font-family:var(--serif);color:#fff;font-size:clamp(1rem,4.2vw,1.25rem);font-weight:700;margin-top:6px;
+  text-shadow:0 2px 10px rgba(0,0,0,.4)}
+
+/* ============================================================
+   מבנה פרקים — דפי קלף
+   ============================================================ */
 main{position:relative;z-index:1}
-.section{max-width:var(--maxw);margin:0 auto;padding:clamp(2.4rem,6vw,4rem) clamp(1rem,4vw,2rem)}
-.section.alt{
-  background:rgba(255,250,240,.66);border-radius:var(--radius);
-  border:2px solid var(--parch-brd);box-shadow:var(--shadow);margin-top:1rem;margin-bottom:1rem;
-}
-.section-title{
-  font-size:clamp(1.8rem,5vw,2.8rem);color:var(--purple-deep);text-align:center;
-  text-shadow:0 2px 0 #fff;
-}
-.section-lead{text-align:center;color:var(--plum-soft);max-width:680px;margin:.6rem auto 2rem;font-size:1.08rem}
+.section{max-width:var(--maxw);margin:22px auto;padding:30px 18px 34px;position:relative;
+  background:
+    radial-gradient(120% 60% at 50% 0,rgba(255,255,255,.5),transparent 70%),
+    linear-gradient(180deg,var(--cream),var(--parchment) 55%,var(--parchment-2));
+  border:1.5px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow),inset 0 0 0 6px rgba(255,255,255,.35);
+  border-radius:var(--radius)}
+.section::before{content:"";position:absolute;inset:9px;border:1px solid rgba(199,154,52,.28);border-radius:16px;pointer-events:none}
+.section.alt{background:
+    radial-gradient(120% 60% at 50% 0,rgba(255,255,255,.45),transparent 70%),
+    linear-gradient(180deg,#fff6ee,#fbeede 55%,#f6e3cf)}
+.chapter-head{text-align:center;margin-bottom:18px}
+.chapter-eyebrow{display:inline-block;font-family:var(--serif);font-weight:700;letter-spacing:.12em;
+  color:var(--gold-deep);font-size:.82rem;padding:4px 14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.section-title{font-family:var(--serif);font-weight:900;color:var(--royal);line-height:1.2;
+  font-size:clamp(1.5rem,6.4vw,2.2rem);margin:10px 0 6px}
+.chapter-tale{font-family:var(--serif);color:var(--ink);font-size:clamp(1rem,4.2vw,1.16rem);line-height:1.85;
+  max-width:600px;margin:6px auto 0}
+.chapter-tale::first-letter{font-size:2.4em;float:right;line-height:.82;margin:4px 0 2px 8px;color:var(--carrot);
+  font-family:var(--display);text-shadow:1px 2px 0 rgba(199,154,52,.4)}
+.ornament{color:var(--gold-deep);letter-spacing:.3em;margin:12px 0 2px;font-size:1.05rem;opacity:.85}
+.section-lead{text-align:center;color:var(--ink-soft);font-weight:500;margin:2px auto 16px;max-width:560px}
 
-/* ---------- כרטיסים (דפי ספר) ---------- */
-.cards{display:grid;gap:1.2rem}
-.card{
-  background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius);
-  padding:1.4rem;box-shadow:var(--shadow);position:relative;transition:.25s;
-}
-.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-
-/* ---------- ספירה לאחור ---------- */
-.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;max-width:720px;margin:0 auto}
-.cd-box{
-  background:var(--grad-magic);color:#fff;border-radius:var(--radius-sm);padding:1.1rem .4rem;text-align:center;
-  box-shadow:0 12px 26px rgba(124,58,237,.32);border:2px solid #fff;position:relative;overflow:hidden;
-}
-.cd-box::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 0%,rgba(255,255,255,.4),transparent 60%)}
-.cd-num{font-size:clamp(1.8rem,6vw,3rem);line-height:1;position:relative}
-.cd-label{font-size:.85rem;opacity:.95;margin-top:.3rem;position:relative}
-.countdown-msg{text-align:center;margin-top:1.4rem;font-size:1.15rem;font-weight:700;color:var(--carrot-deep)}
-
-/* ---------- מזג אוויר ---------- */
-.weather-box{
-  display:inline-flex;align-items:center;gap:.6rem;background:var(--cream);
-  border:2px solid var(--parch-brd);border-radius:999px;padding:.5rem 1.1rem;box-shadow:var(--shadow);
-  margin:.3rem;
-}
-.wx-emoji{font-size:1.7rem}
-.wx-temp{font-size:1.3rem;font-weight:800;color:var(--purple-deep)}
-.wx-desc{font-size:.9rem;color:var(--plum-soft)}
-
-/* ---------- טיסות ---------- */
-.flight-card{overflow:hidden}
-.flight-card::before{content:"";position:absolute;inset-block-start:0;inset-inline:0;height:6px;background:var(--grad-carrot)}
-.flight-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
-.flight-dir{font-family:var(--font-title);font-size:1.25rem;color:var(--purple-deep)}
-.flight-no{background:var(--cream);border:1px solid var(--parch-brd);border-radius:999px;padding:.2rem .7rem;font-weight:700;font-size:.9rem;color:var(--carrot-deep)}
-.flight-route{display:flex;align-items:center;justify-content:space-between;gap:.6rem;margin:1rem 0}
-.fr-point{text-align:center;min-width:90px}
-.fr-code{font-family:var(--font-title);font-size:1.7rem;color:var(--plum)}
-.fr-city{font-size:.85rem;color:var(--plum-soft)}
-.fr-time{font-weight:800;color:var(--purple-deep);margin-top:.2rem}
-.fr-line{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--carrot) 0 8px,transparent 8px 16px);position:relative}
-.fr-line::after{content:"✈️";position:absolute;inset-inline-start:50%;top:50%;transform:translate(-50%,-50%) scaleX(-1);font-size:1.2rem}
-.flight-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0}
-.flight-meta .chip{background:var(--cream)}
-.flight-cd{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:1rem 0;text-align:center}
-.flight-cd .cd-box{padding:.7rem .2rem;background:var(--grad-gold);color:#6b4a00}
-.flight-cd .cd-box::after{display:none}
-.flight-link{display:inline-block;margin-top:.4rem;font-weight:700;color:var(--magic)}
-.flight-link:hover{text-decoration:underline}
-
-.chip{display:inline-flex;align-items:center;gap:.3rem;background:var(--cream);border:1px solid var(--parch-brd);border-radius:999px;padding:.3rem .8rem;font-size:.88rem;font-weight:600;color:var(--plum)}
-
-/* ---------- כבודה ---------- */
-.baggage-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:1.4rem}
-.brule{background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius-sm);padding:1.1rem;text-align:center;box-shadow:var(--shadow)}
-.br-ic{font-size:2rem}
-.br-t{font-weight:800;color:var(--purple-deep);margin:.3rem 0}
-.br-w{font-size:1.1rem;font-weight:800;color:var(--carrot-deep)}
-.br-d{font-size:.85rem;color:var(--plum-soft);margin-top:.2rem}
-.stroller-banner{
-  display:flex;align-items:center;gap:.8rem;background:linear-gradient(135deg,#d1f5d8,#b9efc6);
-  border:2px solid #7bd49a;border-radius:var(--radius-sm);padding:1rem 1.2rem;font-weight:600;color:#15803d;
-  box-shadow:var(--shadow);
-}
-.stroller-banner .yes{font-size:1.6rem}
-
-/* ---------- נוסעים / כרטיסי כבודה ---------- */
-.passenger-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
-.pax-card{
-  background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius);
-  border-top:6px solid var(--pc,var(--purple));padding:1.3rem;box-shadow:var(--shadow);transition:.25s;
-}
-.pax-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.pax-emoji{font-size:2.4rem}
-.pax-name{font-family:var(--font-title);font-size:1.2rem;color:var(--plum);margin-top:.2rem}
-.pax-role{font-size:.9rem;color:var(--plum-soft);margin-bottom:.7rem}
-.pax-bags{display:flex;flex-direction:column;gap:.4rem}
-.pax-bag{display:flex;align-items:center;gap:.5rem;background:var(--cream);border:1px solid var(--parch-brd);border-radius:12px;padding:.4rem .7rem;font-size:.9rem}
-.pax-alert{
-  margin-top:.7rem;background:linear-gradient(135deg,#ffe1ec,#ffd0e0);border:1px solid var(--pink);
-  border-radius:12px;padding:.5rem .7rem;font-size:.86rem;font-weight:600;color:var(--pink-deep);
-}
-
-/* ---------- אריזה ---------- */
-.packing-tabs{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.4rem}
-.pk-tab{
-  background:var(--cream);border:2px solid var(--parch-brd);border-radius:999px;padding:.5rem 1rem;
-  font-weight:700;cursor:pointer;transition:.2s;color:var(--plum-soft);font-family:inherit;font-size:.95rem;
-}
-.pk-tab:hover{transform:translateY(-2px)}
-.pk-tab.active{background:var(--pc,var(--purple));color:#fff;border-color:#fff;box-shadow:0 8px 18px rgba(124,58,237,.3)}
-.packing-panel{max-width:760px;margin:0 auto}
-.pk-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.4rem}
-.pk-em{font-size:2rem}
-.pk-nm{font-family:var(--font-title);font-size:1.3rem;color:var(--plum)}
-.pk-sub{font-size:.9rem;color:var(--plum-soft)}
-.pk-progress{height:12px;border-radius:999px;background:#ecdcc4;overflow:hidden;margin:.7rem 0 1.1rem;border:1px solid var(--parch-brd)}
-.pk-progress>span{display:block;height:100%;background:var(--grad-carrot);width:0;transition:width .4s ease}
-.pk-list{display:grid;gap:.5rem}
-.pk-item{
-  display:flex;align-items:center;gap:.7rem;background:var(--parchment);border:2px solid var(--parch-brd);
-  border-radius:14px;padding:.6rem .9rem;cursor:pointer;transition:.2s;
-}
-.pk-item:hover{transform:translateX(-4px);border-color:var(--carrot)}
-.pk-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--carrot);display:grid;place-items:center;flex:none;font-size:.8rem;color:#fff;transition:.2s}
-.pk-item.done{opacity:.6}
-.pk-item.done .pk-check{background:var(--ok);border-color:var(--ok)}
-.pk-item.done .pk-txt{text-decoration:line-through}
-.pk-txt{font-weight:600}
-
-/* ---------- טיפים ---------- */
-.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem}
-.tip{background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);transition:.25s}
-.tip:hover{transform:translateY(-5px) rotate(-1deg);box-shadow:var(--shadow-lg)}
-.tip-ic{font-size:2rem}
-.tip-t{font-family:var(--font-title);font-size:1.1rem;color:var(--purple-deep);margin:.3rem 0}
-.tip-x{font-size:.94rem;color:var(--plum-soft)}
-
-/* ---------- מלון ---------- */
-.hotel-wrap{display:grid;gap:1.4rem}
-.hotel-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.7rem}
-.hotel-gallery img{height:180px;width:100%;object-fit:cover;border-radius:var(--radius-sm);border:3px solid #fff;box-shadow:var(--shadow)}
-.hotel-info{background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow)}
-.hotel-name{font-family:var(--font-title);font-size:1.6rem;color:var(--purple-deep)}
-.hotel-stars{color:var(--gold);font-size:1.2rem;margin:.2rem 0}
-.hotel-blurb{color:var(--plum-soft);margin:.6rem 0 1rem}
-.hotel-facts{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem}
-.hfact{background:var(--cream);border:1px solid var(--parch-brd);border-radius:999px;padding:.35rem .8rem;font-size:.88rem;font-weight:600}
-.amenities{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin-top:.6rem}
-.amen{display:flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:600;color:var(--plum)}
-.amen .a-ic{font-size:1.3rem}
-.hotel-btns{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
-
-/* ---------- כפתורים ---------- */
-.btn-primary,.btn-ghost{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.3rem;border-radius:999px;font-weight:700;cursor:pointer;border:2px solid transparent;transition:.2s;font-family:inherit;font-size:.96rem}
-.btn-primary{background:var(--grad-magic);color:#fff;box-shadow:0 10px 24px rgba(124,58,237,.35);border-color:#fff}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 32px rgba(124,58,237,.45)}
-.btn-ghost{background:var(--cream);color:var(--purple-deep);border-color:var(--parch-brd)}
-.btn-ghost:hover{background:#fff;border-color:var(--purple);transform:translateY(-2px)}
-
-/* ---------- סביבה / מקומות ---------- */
-.explore-tabs{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.6rem}
-.ex-tab{background:var(--cream);border:2px solid var(--parch-brd);border-radius:999px;padding:.5rem 1.1rem;font-weight:700;cursor:pointer;transition:.2s;color:var(--plum-soft);font-family:inherit;font-size:.95rem}
-.ex-tab:hover{transform:translateY(-2px)}
-.ex-tab.active{background:var(--grad-carrot);color:#fff;border-color:#fff;box-shadow:0 8px 18px rgba(239,108,26,.3)}
-.explore-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.2rem}
-.place{background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius);padding:1.3rem;box-shadow:var(--shadow);transition:.25s}
-.place:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
-.place-top{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
-.place-emoji{font-size:2rem}
-.place-name{font-family:var(--font-title);font-size:1.15rem;color:var(--plum)}
-.place-he{font-size:.9rem;color:var(--plum-soft)}
-.place-cuisine{font-size:.86rem;color:var(--carrot-deep);font-weight:700;margin-bottom:.3rem}
-.place-tag{display:inline-block;background:var(--grad-gold);color:#6b4a00;border-radius:999px;padding:.2rem .7rem;font-size:.8rem;font-weight:700;margin-bottom:.5rem}
-.place-walk{display:inline-flex;align-items:center;gap:.3rem;font-size:.85rem;color:var(--leaf-deep);font-weight:700}
-.place-menu{margin:.6rem 0;display:grid;gap:.3rem}
-.place-menu .pk-em{font-size:1rem}
-.place-link{display:inline-block;margin-top:.5rem;font-weight:700;color:var(--magic)}
-.place-link:hover{text-decoration:underline}
-
-/* ---------- מפה חיה ---------- */
-.map-controls{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:1rem}
-.map-status{text-align:center;font-weight:600;color:var(--plum-soft);margin-bottom:1rem;min-height:1.4em}
-#map{height:460px;border-radius:var(--radius);border:3px solid #fff;box-shadow:var(--shadow-lg);overflow:hidden;z-index:1}
-.map-note{text-align:center;color:var(--plum-soft);font-size:.9rem;margin-top:.8rem}
-
-/* ---------- קשר ---------- */
-.contact-card{max-width:480px;margin:0 auto;text-align:center;background:var(--parchment);border:2px solid var(--parch-brd);border-radius:var(--radius);padding:1.8rem;box-shadow:var(--shadow)}
-.ct-name{font-family:var(--font-title);font-size:1.5rem;color:var(--purple-deep)}
-.ct-agency{color:var(--carrot-deep);font-weight:700;margin:.2rem 0 .3rem}
-.ct-row{display:flex;align-items:center;justify-content:center;gap:.5rem;margin:.4rem 0;color:var(--plum-soft)}
-.contact-btns{display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;margin-top:1.1rem}
-.wa{background:linear-gradient(135deg,#25d366,#128c4f)!important;color:#fff!important;border-color:#fff!important}
-
-/* ---------- פוטר ---------- */
-.footer{text-align:center;padding:2.6rem 1.2rem 3rem;color:var(--plum-soft)}
-.footer-cast{display:flex;align-items:flex-end;justify-content:center;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
-.footer-cast svg{width:clamp(40px,8vw,62px);height:auto;filter:drop-shadow(0 6px 8px rgba(91,33,182,.18));transition:.2s}
-.footer-cast svg:hover{transform:translateY(-6px) scale(1.08)}
-.footer p{margin:.2rem 0}
-.footer-small{font-size:.9rem;opacity:.85}
-
-/* ---------- קונפטי ---------- */
-.confetti-btn{position:fixed;inset-block-end:1.2rem;inset-inline-end:1.2rem;z-index:60;width:58px;height:58px;border-radius:50%;border:2px solid #fff;background:var(--grad-magic);color:#fff;font-size:1.6rem;cursor:pointer;box-shadow:0 12px 26px rgba(124,58,237,.4);transition:.2s}
-.confetti-btn:hover{transform:scale(1.12) rotate(12deg)}
-.confetti-piece{position:fixed;top:-40px;font-size:1.5rem;z-index:59;pointer-events:none;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(105vh) rotate(540deg);opacity:.2}}
-
-/* ---------- גילוי בגלילה ---------- */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* ---------- כללי yes/no ---------- */
-.yes{color:var(--ok)}
-.no{color:var(--no)}
+/* ============================================================
+   ספירה לאחור
+   ============================================================ */
+.countdown-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:520px;margin:0 auto}
+.cd-box{position:relative;text-align:center;padding:16px 4px;border-radius:16px;color:#fff;
+  background:linear-gradient(165deg,#7c4ddb,#4b2f86);border:1.5px solid var(--gold-deep);
+  box-shadow:var(--shadow-soft),inset 0 1px 0 rgba(255,255,255,.25);overflow:hidden}
+.cd-box::after{content:"";position:absolute;inset:0;background:radial-gradient(80% 50% at 50% 0,rgba(255,231,168,.35),transparent 70%)}
+.cd-num{display:block;font-family:var(--fun);font-weight:700;font-size:clamp(1.7rem,8vw,2.7rem);line-height:1;
+  color:var(--gold-glow);text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.cd-label{font-size:.78rem;font-weight:600;opacity:.95;letter-spacing:.04em}
+.countdown-msg{text-align:center;margin-top:16px;font-family:var(--serif);font-weight:700;color:var(--royal);
+  font-size:1.05rem;min-height:1.4em}
 
-/* ---------- רספונסיבי ---------- */
-@media(max-width:860px){
-  .nav-toggle{display:block}
-  .nav-links{position:absolute;top:100%;inset-inline:0;flex-direction:column;background:rgba(255,250,240,.97);
-    padding:.8rem 1rem;gap:.2rem;border-bottom:2px solid var(--parch-brd);box-shadow:var(--shadow);display:none}
-  .nav-links.open{display:flex}
-  .countdown-grid{grid-template-columns:repeat(2,1fr)}
+/* ============================================================
+   טיסות
+   ============================================================ */
+.cards{display:grid;gap:16px}
+.card,.flight-card{background:linear-gradient(180deg,#fff,#fdf6e8);border:1.5px solid var(--line);border-radius:18px;
+  padding:16px;box-shadow:var(--shadow-soft)}
+.flight-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}
+.flight-dir{font-family:var(--serif);font-weight:800;color:var(--royal);font-size:1.15rem}
+.flight-no{font-family:var(--fun);font-weight:700;color:#fff;background:var(--purple);padding:3px 12px;border-radius:999px;font-size:.85rem}
+.flight-route{display:flex;align-items:center;gap:8px;padding:10px 4px}
+.fr-point{text-align:center;flex:1}
+.fr-code{font-family:var(--fun);font-weight:700;font-size:1.5rem;color:var(--royal)}
+.fr-time{font-weight:800;color:var(--carrot);font-size:1.05rem}
+.fr-city{font-size:.78rem;color:var(--ink-soft)}
+.fr-line{flex:1.3;text-align:center;position:relative;color:var(--purple)}
+.fr-line::before{content:"";position:absolute;top:50%;right:6%;left:6%;height:2px;
+  background:repeating-linear-gradient(90deg,var(--purple) 0 6px,transparent 6px 12px);opacity:.5}
+.fr-line span{position:relative;background:#fff;padding:0 6px;font-size:1.1rem}
+.flight-meta{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chip{background:rgba(124,77,219,.12);color:var(--royal);border:1px solid rgba(124,77,219,.25);
+  padding:4px 10px;border-radius:999px;font-size:.8rem;font-weight:600}
+.flight-cd{text-align:center;background:linear-gradient(180deg,#fff4e0,#ffe8c4);border:1px dashed var(--gold-deep);
+  border-radius:12px;padding:9px;font-size:.92rem;color:var(--royal);margin:8px 0}
+.flight-cd b{color:var(--carrot);font-family:var(--fun)}
+.weather-box{display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,#eaf6ff,#d7ecff);
+  border:1px solid #b9dcff;border-radius:12px;padding:10px;margin-bottom:10px}
+.wx-emoji{font-size:1.7rem}
+.wx-temp{font-family:var(--fun);font-weight:700;font-size:1.3rem;color:#1769b0}
+.wx-desc{font-size:.85rem;color:#2c5b86;font-weight:500}
+.flight-link{display:block;text-align:center;padding:11px;border-radius:12px;font-weight:700;color:#fff;
+  background:linear-gradient(180deg,#8a5be0,#6d28d9);box-shadow:0 6px 16px rgba(109,40,217,.35)}
+.flight-link:active{transform:scale(.98)}
+.checkin-reminder{margin-top:16px;text-align:center;background:linear-gradient(180deg,#fff,#fdf3e0);
+  border:1.5px solid var(--gold-deep);border-radius:16px;padding:14px 16px;color:var(--royal);font-weight:500;line-height:1.7}
+.checkin-reminder b{color:var(--carrot)}
+
+/* ============================================================
+   כבודה
+   ============================================================ */
+.baggage-rules{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:640px;margin:0 auto 18px}
+.brule{text-align:center;background:linear-gradient(180deg,#fff,#fbeede);border:1.5px solid var(--line);
+  border-radius:16px;padding:14px 8px;box-shadow:var(--shadow-soft)}
+.br-ic{font-size:1.8rem}
+.br-t{font-family:var(--serif);font-weight:800;color:var(--royal);margin-top:2px}
+.br-w{font-family:var(--fun);font-weight:700;color:var(--carrot);font-size:1.1rem}
+.br-d{font-size:.76rem;color:var(--ink-soft);line-height:1.4}
+.baggage-yes{grid-column:1/-1;background:linear-gradient(180deg,#eafff3,#d6f8e6);border:1.5px solid #54c98a;
+  color:#13733f;font-weight:600;line-height:1.6;font-size:.95rem}
+.stroller-banner{grid-column:1/-1;background:linear-gradient(180deg,#fff0f6,#ffe0ee);border:1.5px solid var(--rose);
+  color:#b03064;font-weight:600;line-height:1.6;font-size:.95rem}
+.passenger-grid{display:grid;grid-template-columns:1fr;gap:12px;max-width:680px;margin:0 auto}
+.pax-card{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px 16px 16px 18px;
+  box-shadow:var(--shadow-soft);overflow:hidden}
+.pax-card::before{content:"";position:absolute;top:0;bottom:0;right:0;width:7px;background:var(--pc,#7c4ddb)}
+.pax-emoji{font-size:2rem;float:right;margin-right:4px}
+.pax-name{font-family:var(--serif);font-weight:800;color:var(--royal);font-size:1.2rem}
+.pax-role{color:var(--pc,#7c4ddb);font-weight:700;font-size:.9rem;margin-bottom:8px}
+.pax-bags{display:flex;flex-wrap:wrap;gap:6px;clear:both}
+.pax-bag{font-size:.82rem;font-weight:600;padding:5px 11px;border-radius:999px}
+.pax-bag.yes{background:rgba(39,179,163,.14);color:#147a6e;border:1px solid rgba(39,179,163,.35)}
+.pax-bag.no{background:rgba(255,111,156,.12);color:#b03064;border:1px solid rgba(255,111,156,.35)}
+.pax-alert{margin-top:10px;background:#fff6e0;border:1px dashed var(--gold-deep);border-radius:10px;padding:8px 10px;
+  font-size:.84rem;color:#8a6a16;font-weight:600}
+
+/* ============================================================
+   אריזה
+   ============================================================ */
+.packing-tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.packing-tabs::-webkit-scrollbar{display:none}
+.pk-tab{flex:none;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;color:var(--royal);
+  background:#fff;border:1.5px solid var(--line);box-shadow:var(--shadow-soft)}
+.pk-tab.active{color:#fff;background:var(--pc,#7c4ddb);border-color:var(--pc,#7c4ddb);
+  box-shadow:0 8px 18px color-mix(in srgb,var(--pc,#7c4ddb) 45%,transparent)}
+.packing-panel{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow-soft);
+  max-width:640px;margin:0 auto}
+.pk-head{display:flex;align-items:center;gap:10px}
+.pk-em{font-size:1.8rem}
+.pk-nm{font-family:var(--serif);font-weight:800;color:var(--royal);font-size:1.2rem}
+.pk-sub{color:var(--ink-soft);font-size:.9rem;margin:2px 0 12px}
+.pk-progress{height:12px;border-radius:999px;background:#eee3cf;overflow:hidden;border:1px solid var(--line)}
+#pkBar{display:block;height:100%;width:0;border-radius:999px;transition:width .4s ease;
+  background:linear-gradient(90deg,var(--pc,#7c4ddb),var(--gold))}
+.pk-list{list-style:none;margin-top:12px;display:grid;gap:8px}
+.pk-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:#fbf4e6;
+  border:1.5px solid var(--line);font-weight:500;transition:background .2s,transform .1s}
+.pk-item:active{transform:scale(.99)}
+.pk-check{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;color:#fff;
+  background:#fff;border:2px solid var(--pc,#7c4ddb);color:var(--pc,#7c4ddb)}
+.pk-item.done{background:color-mix(in srgb,var(--pc,#7c4ddb) 12%,#fff);border-color:var(--pc,#7c4ddb)}
+.pk-item.done .pk-check{background:var(--pc,#7c4ddb);color:#fff}
+.pk-item.done .pk-txt{text-decoration:line-through;opacity:.6}
+.tips-grid{display:grid;gap:10px;margin-top:18px}
+.tip{display:flex;align-items:flex-start;gap:10px;background:linear-gradient(180deg,#fff,#fdf3e0);
+  border:1.5px solid var(--line);border-radius:14px;padding:12px}
+.tip-ic{font-size:1.5rem;flex:none}
+.tip-t{font-family:var(--serif);font-weight:800;color:var(--royal)}
+.tip-x{font-size:.88rem;color:var(--ink-soft)}
+.tip>div:last-child{min-width:0}
+
+/* ============================================================
+   מלון
+   ============================================================ */
+.hotel-wrap{display:grid;gap:18px}
+.hotel-gallery{display:grid;grid-auto-flow:column;grid-auto-columns:84%;gap:10px;overflow-x:auto;padding-bottom:8px;
+  scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hotel-gallery::-webkit-scrollbar{display:none}
+.hg-fig{position:relative;scroll-snap-align:center;margin:0;border-radius:16px;overflow:hidden;
+  border:1.5px solid var(--line);box-shadow:var(--shadow-soft)}
+.hg-fig img{width:100%;height:230px;object-fit:cover}
+.hg-fig figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 12px 8px;color:#fff;font-weight:600;font-size:.85rem;
+  background:linear-gradient(0deg,rgba(0,0,0,.65),transparent)}
+.hotel-info{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow-soft)}
+.hotel-name{font-family:var(--serif);font-weight:900;color:var(--royal);font-size:1.4rem;line-height:1.2}
+.hotel-stars{color:var(--gold-deep);font-size:1.2rem;letter-spacing:.1em;margin:2px 0 8px}
+.hotel-blurb{color:var(--ink);line-height:1.75}
+.hotel-facts{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.hfact{font-size:.82rem;font-weight:600;color:var(--royal);background:rgba(124,77,219,.1);
+  border:1px solid rgba(124,77,219,.22);padding:5px 11px;border-radius:999px}
+.amenities{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0 16px}
+.amen{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:500;color:var(--ink)}
+.a-ic{font-size:1.1rem}
+.hotel-btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn-primary,.btn-ghost{padding:12px 18px;border-radius:999px;font-weight:700;font-size:.92rem;text-align:center}
+.btn-primary{color:#fff;background:linear-gradient(180deg,#8a5be0,#6d28d9);box-shadow:0 8px 18px rgba(109,40,217,.4)}
+.btn-ghost{color:var(--royal);background:#fff;border:1.5px solid var(--purple)}
+.btn-primary:active,.btn-ghost:active{transform:scale(.97)}
+
+/* ============================================================
+   סביבה — מקומות
+   ============================================================ */
+.explore-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.ex-tab{padding:10px 18px;border-radius:999px;font-weight:700;color:var(--royal);background:#fff;
+  border:1.5px solid var(--line);box-shadow:var(--shadow-soft)}
+.ex-tab.active{color:#fff;background:linear-gradient(180deg,#8a5be0,#6d28d9);border-color:#6d28d9}
+.explore-content{display:grid;gap:14px}
+.taxi-note{background:linear-gradient(180deg,#fff7e8,#ffeccb);border:1.5px dashed var(--gold-deep);border-radius:14px;
+  padding:12px 14px;color:#8a6a16;font-weight:600;line-height:1.6;font-size:.92rem;text-align:center}
+.place{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow-soft)}
+.place-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.place-emoji{font-size:1.9rem;flex:none}
+.place-name{font-family:var(--serif);font-weight:800;color:var(--royal);font-size:1.15rem;line-height:1.2}
+.place-he{font-size:.8rem;color:var(--ink-soft)}
+.place-walk{display:inline-block;font-size:.84rem;font-weight:600;color:#147a6e;background:rgba(39,179,163,.12);
+  border:1px solid rgba(39,179,163,.3);padding:4px 11px;border-radius:999px;margin-bottom:8px}
+.from-hotel{opacity:.8;font-weight:500}
+.place-tag{display:inline-block;font-size:.78rem;font-weight:700;color:var(--carrot);
+  background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.3);padding:3px 10px;border-radius:999px;margin:0 0 8px 6px}
+.place-cuisine{color:var(--ink);font-weight:500;line-height:1.6;margin-bottom:6px}
+.place-menu{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.place-menu li{font-size:.8rem;background:#fbf4e6;border:1px solid var(--line);padding:4px 10px;border-radius:8px;color:var(--ink-soft)}
+.place-links{display:flex;flex-wrap:wrap;gap:8px}
+.place-link{display:inline-block;padding:10px 16px;border-radius:999px;font-weight:700;font-size:.86rem;color:var(--royal);
+  background:#fff;border:1.5px solid var(--purple)}
+.place-link.taxi{color:#fff;background:linear-gradient(180deg,#34c759,#1f9d45);border-color:#1f9d45;
+  box-shadow:0 6px 14px rgba(31,157,69,.35)}
+.place-link:active{transform:scale(.97)}
+
+/* ============================================================
+   מפה + קשר
+   ============================================================ */
+.map-controls{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+#meName{flex:1;min-width:180px;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);
+  background:#fff;font-family:inherit;font-size:1rem;color:var(--ink)}
+#meName:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,77,219,.18)}
+.map-status{align-self:center;font-size:.84rem;font-weight:600;color:var(--ink-soft);
+  background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+#liveMap{height:360px;border-radius:18px;border:2px solid var(--gold-deep);box-shadow:var(--shadow);overflow:hidden;z-index:1}
+.map-note{text-align:center;font-size:.82rem;color:var(--ink-soft);margin-top:12px;line-height:1.6}
+.contact-card{max-width:440px;margin:0 auto;text-align:center;background:linear-gradient(180deg,#fff,#fdf3e0);
+  border:1.5px solid var(--gold-deep);border-radius:20px;padding:24px 18px;box-shadow:var(--shadow)}
+.ct-em{font-size:3rem}
+.ct-name{font-family:var(--serif);font-weight:900;color:var(--royal);font-size:1.5rem}
+.ct-agency{color:var(--carrot);font-weight:700;margin-bottom:12px}
+.ct-row{color:var(--ink);font-weight:500;margin:5px 0}
+.contact-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.contact-btns a{padding:12px 20px;border-radius:999px;font-weight:700;color:#fff;
+  background:linear-gradient(180deg,#8a5be0,#6d28d9);box-shadow:0 8px 18px rgba(109,40,217,.35)}
+.contact-btns .wa{background:linear-gradient(180deg,#34c759,#1f9d45);box-shadow:0 8px 18px rgba(31,157,69,.35)}
+.contact-btns a:active{transform:scale(.97)}
+
+/* ============================================================
+   פוטר + קונפטי
+   ============================================================ */
+.footer{text-align:center;padding:40px 20px 80px;color:#fff}
+.footer-cast{display:flex;justify-content:center;align-items:flex-end;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.footer-cast svg{width:46px;height:auto;filter:drop-shadow(0 6px 10px rgba(0,0,0,.3))}
+.footer-tale{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--gold-glow);max-width:600px;
+  margin:0 auto 14px;line-height:1.8;text-shadow:0 2px 10px rgba(0,0,0,.4)}
+.footer p{margin:4px 0}
+.footer-small{opacity:.85;font-size:.9rem}
+.confetti-btn{position:fixed;bottom:18px;left:18px;z-index:400;width:60px;height:60px;border-radius:50%;font-size:1.7rem;
+  background:linear-gradient(180deg,#ffe9b0,#e9c46a);border:2px solid #fff3d4;
+  box-shadow:0 10px 24px rgba(233,196,106,.5);animation:bob 3s ease-in-out infinite}
+.confetti-btn:active{transform:scale(.9)}
+.confetti-piece{position:fixed;top:-40px;font-size:1.5rem;z-index:999;pointer-events:none;will-change:transform}
+
+/* ============================================================
+   טאבלט / דסקטופ
+   ============================================================ */
+@media(min-width:700px){
+  .navbar{padding:12px 28px}
+  .nav-toggle{display:none}
+  .nav-links{display:flex;flex-direction:row;position:static;background:none;border:none;padding:0;gap:4px}
+  .nav-links a{padding:8px 13px;font-size:.95rem;color:#f0e7ff}
+  .section{padding:42px 36px 46px;margin:30px auto}
+  .cards{grid-template-columns:1fr 1fr}
+  .passenger-grid{grid-template-columns:1fr 1fr}
+  .tips-grid{grid-template-columns:1fr 1fr}
+  .explore-content{grid-template-columns:1fr 1fr}
+  .hotel-wrap{grid-template-columns:1.15fr 1fr;align-items:start}
+  .hotel-gallery{grid-auto-flow:row;grid-template-columns:1fr 1fr;grid-auto-columns:auto;overflow:visible}
+  .hg-fig img{height:170px}
+  .hero-carrot{width:96px;left:10%}
 }
-@media(max-width:680px){
-  .flight-cd{grid-template-columns:repeat(2,1fr)}
-  .hero-carrot{width:70px}
-  .fr-code{font-size:1.4rem}
-  #map{height:380px}
+@media(min-width:1000px){
+  .baggage-rules{grid-template-columns:repeat(4,1fr)}
+  .baggage-yes,.stroller-banner{grid-column:1/-1}
+  .passenger-grid{grid-template-columns:repeat(4,1fr)}
+  .tips-grid{grid-template-columns:repeat(4,1fr)}
+  .explore-content{grid-template-columns:repeat(3,1fr)}
+  .cards{grid-template-columns:1fr 1fr}
+  .hotel-gallery{grid-template-columns:1fr 1fr 1fr}
+  .amenities{grid-template-columns:1fr 1fr 1fr}
 }
 
+/* נגישות — צמצום אנימציות */
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
