@@ -468,29 +468,49 @@
         installClose = $("#installClose"), iosHint = $("#iosInstallHint");
   const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
   const installDismissed = localStorage.getItem("cyprus2026_install_dismissed");
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault(); deferredPrompt = e;
-    if (installBanner && !installDismissed && !isStandalone) installBanner.hidden = false;
-  });
-  if (installBtn) installBtn.addEventListener("click", async () => {
+  const SHOW_KEY = "cyprus2026_install_shows";
+  const installShows = () => parseInt(localStorage.getItem(SHOW_KEY) || "0", 10);
+  const bumpInstallShows = () => localStorage.setItem(SHOW_KEY, String(installShows() + 1));
+  // הבאנר יופיע פעמיים בלבד, ורק אם לא הותקן/נדחה
+  const canShowInstall = () => !isStandalone && !installDismissed && installShows() < 2;
+
+  async function runInstall() {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     try { await deferredPrompt.userChoice; } catch (e) {}
     deferredPrompt = null;
     if (installBanner) installBanner.hidden = true;
+  }
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault(); deferredPrompt = e;
+    if (installBanner && canShowInstall()) {
+      installBanner.hidden = false; installBanner.style.cursor = "pointer"; bumpInstallShows();
+    }
   });
-  if (installClose) installClose.addEventListener("click", () => {
+  // לחיצה על כל הבאנר מתקינה את האפליקציה
+  if (installBanner) installBanner.addEventListener("click", runInstall);
+  if (installBtn) installBtn.addEventListener("click", (e) => { e.stopPropagation(); runInstall(); });
+  if (installClose) installClose.addEventListener("click", (e) => {
+    e.stopPropagation();
     if (installBanner) installBanner.hidden = true;
     localStorage.setItem("cyprus2026_install_dismissed", "1");
   });
   window.addEventListener("appinstalled", () => { if (installBanner) installBanner.hidden = true; });
-  // iOS Safari — אין beforeinstallprompt, מציגים רמז ידני
+
+  // iOS Safari — אין beforeinstallprompt; לחיצה פותחת את גיליון השיתוף («הוסף למסך הבית»)
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
   const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
-  if (isIOS && isSafari && !isStandalone && !installDismissed && iosHint) {
+  if (isIOS && isSafari && iosHint && canShowInstall()) {
     setTimeout(() => { iosHint.hidden = false; }, 2600);
+    iosHint.style.cursor = "pointer";
+    bumpInstallShows();
+    iosHint.addEventListener("click", async () => {
+      if (navigator.share) { try { await navigator.share({ title: document.title, url: location.href }); } catch (e) {} }
+    });
     const ic = $("#iosHintClose");
-    if (ic) ic.addEventListener("click", () => {
+    if (ic) ic.addEventListener("click", (e) => {
+      e.stopPropagation();
       iosHint.hidden = true; localStorage.setItem("cyprus2026_install_dismissed", "1");
     });
   }
