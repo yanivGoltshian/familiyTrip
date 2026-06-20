@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7c3aed" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥕</text></svg>" />
+  <title>החופשה שלנו בקפריסין · אוגוסט 2026 🥕</title>
+  <meta name="description" content="אתר החופשה שלנו ללרנקה, קפריסין — ספירה לאחור, טיסות, כבודה, רשימות אריזה, המלצות ומפה חיה." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&family=Suez+One&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet (מפה) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- דמויות אגדה (אליעזר והגזר) — סְפְרַייט נסתר -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ch-carrot" viewBox="0 0 120 170">
+        <g fill="#4faf4a" stroke="#3d8c39" stroke-width="2" stroke-linejoin="round">
+          <path d="M60 42 C52 18 42 6 38 4 C42 18 46 30 50 44 Z"/>
+          <path d="M60 42 C60 14 58 4 60 0 C64 6 66 22 66 42 Z" fill="#5cbf52"/>
+          <path d="M60 42 C68 18 78 6 82 4 C78 18 74 30 70 44 Z"/>
+        </g>
+        <path d="M40 46 Q60 38 80 46 L66 150 Q60 166 54 150 Z" fill="#ff8a3d" stroke="#e8732a" stroke-width="3" stroke-linejoin="round"/>
+        <g stroke="#e8732a" stroke-width="2" stroke-linecap="round" opacity=".55">
+          <line x1="47" y1="66" x2="73" y2="66"/><line x1="49" y1="86" x2="71" y2="86"/>
+          <line x1="51" y1="106" x2="69" y2="106"/><line x1="54" y1="126" x2="66" y2="126"/>
+        </g>
+        <circle cx="52" cy="68" r="4" fill="#3b2a2a"/><circle cx="68" cy="68" r="4" fill="#3b2a2a"/>
+        <circle cx="53.2" cy="66.6" r="1.3" fill="#fff"/><circle cx="69.2" cy="66.6" r="1.3" fill="#fff"/>
+        <circle cx="46" cy="76" r="4" fill="#ff5e8a" opacity=".45"/><circle cx="74" cy="76" r="4" fill="#ff5e8a" opacity=".45"/>
+        <path d="M52 78 Q60 86 68 78" fill="none" stroke="#3b2a2a" stroke-width="2.6" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ch-grandpa" viewBox="0 0 100 140">
+        <rect x="34" y="96" width="14" height="38" rx="6" fill="#3b73c4"/><rect x="52" y="96" width="14" height="38" rx="6" fill="#3b73c4"/>
+        <ellipse cx="40" cy="134" rx="10" ry="5" fill="#6f4322"/><ellipse cx="60" cy="134" rx="10" ry="5" fill="#6f4322"/>
+        <path d="M30 70 Q50 60 70 70 L70 100 Q50 106 30 100 Z" fill="#f6c945"/>
+        <path d="M30 72 Q19 84 24 97" fill="none" stroke="#f6c945" stroke-width="10" stroke-linecap="round"/>
+        <path d="M70 72 Q81 84 76 97" fill="none" stroke="#f6c945" stroke-width="10" stroke-linecap="round"/>
+        <path d="M42 78 L58 78 L58 100 L42 100 Z" fill="#3b73c4"/>
+        <line x1="44" y1="69" x2="45" y2="80" stroke="#2f5da0" stroke-width="3"/><line x1="56" y1="69" x2="55" y2="80" stroke="#2f5da0" stroke-width="3"/>
+        <circle cx="50" cy="50" r="20" fill="#f4c89e"/>
+        <path d="M33 52 Q50 88 67 52 Q60 66 50 66 Q40 66 33 52" fill="#f3f3f3"/>
+        <ellipse cx="50" cy="34" rx="30" ry="8" fill="#dca74f"/><path d="M33 34 Q50 13 67 34 Z" fill="#edc878"/>
+        <circle cx="44" cy="48" r="2.4" fill="#3b2a2a"/><circle cx="56" cy="48" r="2.4" fill="#3b2a2a"/>
+        <circle cx="50" cy="55" r="3" fill="#eaa97a"/>
+      </symbol>
+      <symbol id="ch-grandma" viewBox="0 0 100 140">
+        <path d="M30 96 Q50 90 70 96 L78 134 L22 134 Z" fill="#3f9b54"/>
+        <ellipse cx="38" cy="134" rx="9" ry="5" fill="#6f4322"/><ellipse cx="62" cy="134" rx="9" ry="5" fill="#6f4322"/>
+        <path d="M30 70 Q50 60 70 70 L70 100 Q50 106 30 100 Z" fill="#f48fb1"/>
+        <path d="M30 72 Q19 84 24 97" fill="none" stroke="#f48fb1" stroke-width="10" stroke-linecap="round"/>
+        <path d="M70 72 Q81 84 76 97" fill="none" stroke="#f48fb1" stroke-width="10" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="19" fill="#f4c89e"/>
+        <path d="M31 47 Q50 23 69 47 Q50 37 31 47" fill="#e0524d"/>
+        <path d="M31 47 Q36 41 50 39 Q64 41 69 47 L66 51 Q50 45 34 51 Z" fill="#ef6a64"/>
+        <circle cx="69" cy="47" r="4" fill="#e0524d"/>
+        <circle cx="44" cy="51" r="4" fill="none" stroke="#7a5a3a" stroke-width="1.5"/><circle cx="56" cy="51" r="4" fill="none" stroke="#7a5a3a" stroke-width="1.5"/>
+        <circle cx="44" cy="51" r="1.8" fill="#3b2a2a"/><circle cx="56" cy="51" r="1.8" fill="#3b2a2a"/>
+        <path d="M46 59 Q50 62 54 59" fill="none" stroke="#b55a72" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ch-girl" viewBox="0 0 100 140">
+        <path d="M32 78 Q50 70 68 78 L76 126 L24 126 Z" fill="#a371d6"/>
+        <ellipse cx="40" cy="128" rx="8" ry="4" fill="#6b3fa0"/><ellipse cx="60" cy="128" rx="8" ry="4" fill="#6b3fa0"/>
+        <path d="M34 80 Q24 92 28 104" fill="none" stroke="#f4c89e" stroke-width="8" stroke-linecap="round"/>
+        <path d="M66 80 Q76 92 72 104" fill="none" stroke="#f4c89e" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="50" cy="52" r="18" fill="#f4c89e"/>
+        <path d="M32 52 Q34 31 50 31 Q66 31 68 52 Q60 41 50 41 Q40 41 32 52" fill="#7a4a22"/>
+        <circle cx="30" cy="52" r="7" fill="#7a4a22"/><circle cx="70" cy="52" r="7" fill="#7a4a22"/>
+        <circle cx="30" cy="52" r="3" fill="#ff7ab0"/><circle cx="70" cy="52" r="3" fill="#ff7ab0"/>
+        <circle cx="44" cy="53" r="2.4" fill="#3b2a2a"/><circle cx="56" cy="53" r="2.4" fill="#3b2a2a"/>
+        <path d="M45 60 Q50 64 55 60" fill="none" stroke="#b55a72" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ch-dog" viewBox="0 0 120 90">
+        <path d="M22 70 Q12 64 18 77" fill="none" stroke="#a9743f" stroke-width="6" stroke-linecap="round"/>
+        <ellipse cx="58" cy="68" rx="40" ry="16" fill="#efe6da"/>
+        <ellipse cx="50" cy="62" rx="15" ry="13" fill="#a9743f"/>
+        <rect x="44" y="74" width="7" height="13" rx="3" fill="#efe6da"/><rect x="74" y="74" width="7" height="13" rx="3" fill="#efe6da"/>
+        <circle cx="92" cy="48" r="20" fill="#efe6da"/>
+        <path d="M76 33 Q69 28 68 41 Q75 44 80 41 Z" fill="#a9743f"/>
+        <ellipse cx="101" cy="56" rx="11" ry="9" fill="#f7f1e8"/>
+        <circle cx="101" cy="54" r="3" fill="#3b2a2a"/><circle cx="90" cy="45" r="2.6" fill="#3b2a2a"/>
+        <path d="M97 60 Q101 63 105 60" fill="none" stroke="#b08a5a" stroke-width="1.6" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ch-cat" viewBox="0 0 90 90">
+        <path d="M68 60 Q85 56 79 74" fill="none" stroke="#e8743b" stroke-width="7" stroke-linecap="round"/>
+        <ellipse cx="45" cy="64" rx="26" ry="18" fill="#e8743b"/>
+        <path d="M30 28 L26 13 L41 24 Z" fill="#e8743b"/><path d="M60 28 L64 13 L49 24 Z" fill="#e8743b"/>
+        <path d="M31 27 L29 18 L38 25 Z" fill="#f4a06a"/><path d="M59 27 L61 18 L52 25 Z" fill="#f4a06a"/>
+        <circle cx="45" cy="40" r="18" fill="#e8743b"/>
+        <g stroke="#c85a28" stroke-width="2" stroke-linecap="round"><line x1="45" y1="25" x2="45" y2="31"/><line x1="38" y1="26" x2="40" y2="32"/><line x1="52" y1="26" x2="50" y2="32"/></g>
+        <circle cx="39" cy="41" r="2.6" fill="#2a2a2a"/><circle cx="51" cy="41" r="2.6" fill="#2a2a2a"/>
+        <path d="M45 45 L43 48 M45 45 L47 48" stroke="#2a2a2a" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M41 49 Q45 52 49 49" fill="none" stroke="#2a2a2a" stroke-width="1.6" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="ch-mouse" viewBox="0 0 80 70">
+        <path d="M18 50 Q4 52 9 63" fill="none" stroke="#b9b6c2" stroke-width="4" stroke-linecap="round"/>
+        <ellipse cx="40" cy="48" rx="22" ry="16" fill="#b9b6c2"/>
+        <circle cx="54" cy="30" r="8" fill="#cfc6d6"/><circle cx="66" cy="30" r="8" fill="#cfc6d6"/>
+        <circle cx="54" cy="30" r="4" fill="#f5c6d6"/><circle cx="66" cy="30" r="4" fill="#f5c6d6"/>
+        <circle cx="60" cy="40" r="12" fill="#b9b6c2"/>
+        <circle cx="64" cy="39" r="2.2" fill="#2a2a2a"/>
+        <circle cx="71" cy="44" r="2.2" fill="#ff8aa0"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- רקע אגדה מכושף -->
+  <div class="story-bg" aria-hidden="true">
+    <div class="sun-glow"></div>
+    <div class="stars"></div>
+    <div class="hill hill1"></div>
+    <div class="hill hill2"></div>
+    <span class="bg-spark b1">✨</span>
+    <span class="bg-spark b2">⭐</span>
+    <span class="bg-spark b3">✨</span>
+  </div>
+
+  <!-- ניווט -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-logo">🥕 קפריסין 2026</a>
+    <button class="nav-toggle" id="navToggle" aria-label="תפריט">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#countdown">ספירה לאחור</a>
+      <a href="#flights">טיסות</a>
+      <a href="#baggage">כבודה</a>
+      <a href="#packing">אריזה</a>
+      <a href="#hotel">המלון</a>
+      <a href="#explore">סביבה</a>
+      <a href="#map">מפה חיה</a>
+      <a href="#contact">קשר</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="hero">
+    <div class="hero-magic" aria-hidden="true">
+      <span class="spark s1">✨</span><span class="spark s2">⭐</span><span class="spark s3">✨</span><span class="spark s4">🌟</span>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-badge">🪄 עוד רגע יוצאים להרפתקה</div>
+      <h1 class="hero-title" id="heroTitle">החופשה שלנו בקפריסין</h1>
+      <p class="hero-sub" id="heroSub">לרנקה · אוגוסט 2026 · אגדה אחת גדולה של כולנו</p>
+      <div class="hero-flag">🥕 🇨🇾 🏖️ ✨ 🐫 🦩</div>
+      <a href="#countdown" class="hero-cta">בואו נתחיל לספור! ↓</a>
+    </div>
+    <svg class="hero-carrot" viewBox="0 0 120 170" aria-hidden="true"><use href="#ch-carrot"/></svg>
+  </header>
+
+  <!-- אליעזר והגזר — כולם מושכים יחד -->
+  <div class="story-band reveal">
+    <svg class="scene" viewBox="0 0 1000 240" role="img" aria-label="אליעזר והגזר — כולם מושכים את הגזר יחד">
+      <ellipse cx="500" cy="232" rx="470" ry="14" fill="#7ec85f" opacity=".4"/>
+      <path d="M790 150 Q500 220 240 200" stroke="#b07a3a" stroke-width="5" fill="none" stroke-linecap="round" opacity=".8"/>
+      <use href="#ch-carrot" x="800" y="14" width="150" height="213"/>
+      <use href="#ch-grandpa" x="700" y="90" width="100" height="140"/>
+      <use href="#ch-grandma" x="600" y="98" width="100" height="140"/>
+      <use href="#ch-girl" x="512" y="112" width="90" height="126"/>
+      <use href="#ch-dog" x="398" y="150" width="120" height="90"/>
+      <use href="#ch-cat" x="312" y="160" width="80" height="80"/>
+      <use href="#ch-mouse" x="216" y="172" width="75" height="66"/>
+    </svg>
+    <p class="band-cap">כשכּוּלָּם מוֹשְׁכִים יַחַד — אֲפִילוּ גֶּזֶר עֲנָק זָז! 🥕 בְּדִיוּק כְּמוֹ בְּ״אֱלִיעֶזֶר וְהַגֶּזֶר״</p>
+  </div>
+
+  <main>
+    <!-- ספירה לאחור -->
+    <section class="section" id="countdown">
+      <h2 class="section-title">⏳ הספירה לאחור לחופשה</h2>
+      <p class="section-lead">כמה זמן נשאר עד שממריאים?</p>
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="cd-box"><span class="cd-num" id="cdDays">--</span><span class="cd-label">ימים</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdHours">--</span><span class="cd-label">שעות</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdMins">--</span><span class="cd-label">דקות</span></div>
+        <div class="cd-box"><span class="cd-num" id="cdSecs">--</span><span class="cd-label">שניות</span></div>
+      </div>
+      <div class="countdown-msg" id="countdownMsg"></div>
+    </section>
+
+    <!-- טיסות -->
+    <section class="section alt" id="flights">
+      <h2 class="section-title">✈️ הטיסות שלנו</h2>
+      <p class="section-lead">עדכונים חיים, מזג אוויר וספירה לכל טיסה · חברת TUS Airways</p>
+      <div class="cards" id="flightsContainer"></div>
+      <div class="checkin-reminder" id="checkinReminder"></div>
+    </section>
+
+    <!-- כבודה -->
+    <section class="section" id="baggage">
+      <h2 class="section-title">🧳 הכבודה — מה מותר לקחת</h2>
+      <p class="section-lead">הכללים של TUS Airways לכל נוסע</p>
+      <div class="baggage-rules" id="baggageRules"></div>
+      <div class="passenger-grid" id="passengerGrid"></div>
+    </section>
+
+    <!-- אריזה -->
+    <section class="section alt" id="packing">
+      <h2 class="section-title">🎒 רשימת אריזה אישית</h2>
+      <p class="section-lead">בחרו נוסע וקבלו רשימה מותאמת — סמנו ✓ ככל שאורזים!</p>
+      <div class="packing-tabs" id="packingTabs"></div>
+      <div class="packing-panel" id="packingPanel"></div>
+      <div class="tips-grid" id="tipsGrid"></div>
+    </section>
+
+    <!-- מלון -->
+    <section class="section" id="hotel">
+      <h2 class="section-title">🏨 המלון שלנו</h2>
+      <div class="hotel-wrap" id="hotelWrap"></div>
+    </section>
+
+    <!-- סביבה: מסעדות, אטרקציות, שווקים -->
+    <section class="section alt" id="explore">
+      <h2 class="section-title">🗺️ מה יש מסביב</h2>
+      <div class="explore-tabs">
+        <button class="ex-tab active" data-tab="rest">🍽️ מסעדות</button>
+        <button class="ex-tab" data-tab="attr">🎡 אטרקציות</button>
+        <button class="ex-tab" data-tab="mark">🛒 שווקים</button>
+      </div>
+      <div class="explore-content" id="exploreContent"></div>
+    </section>
+
+    <!-- מפה חיה -->
+    <section class="section" id="map">
+      <h2 class="section-title">📍 המפה החיה שלנו</h2>
+      <p class="section-lead">שתפו מיקום כדי לראות אחד את השני על המפה בזמן אמת</p>
+      <div class="map-controls" id="mapControls">
+        <input type="text" id="meName" placeholder="השם שלי על המפה" maxlength="20" />
+        <button id="shareLocBtn" class="btn-primary">📡 שתף את המיקום שלי</button>
+        <button id="stopLocBtn" class="btn-ghost" style="display:none">⏹️ הפסק שיתוף</button>
+        <span class="map-status" id="mapStatus">לא מחובר</span>
+      </div>
+      <div id="liveMap"></div>
+      <p class="map-note">🔒 פרטיות: המיקום משותף רק עם מי שמחזיק בקישור הזה, דרך חדר פרטי שלנו. הנתונים לא נשמרים בשרת.</p>
+    </section>
+
+    <!-- קשר -->
+    <section class="section alt" id="contact">
+      <h2 class="section-title">📞 איש הקשר שלנו</h2>
+      <div class="contact-card" id="contactCard"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-cast" aria-hidden="true">
+      <svg viewBox="0 0 100 140"><use href="#ch-grandpa"/></svg>
+      <svg viewBox="0 0 100 140"><use href="#ch-grandma"/></svg>
+      <svg viewBox="0 0 100 140"><use href="#ch-girl"/></svg>
+      <svg viewBox="0 0 120 90"><use href="#ch-dog"/></svg>
+      <svg viewBox="0 0 90 90"><use href="#ch-cat"/></svg>
+      <svg viewBox="0 0 80 70"><use href="#ch-mouse"/></svg>
+      <svg viewBox="0 0 120 170"><use href="#ch-carrot"/></svg>
+    </div>
+    <p>נבנה באהבה לכל החבר'ה · חופשת קפריסין אוגוסט 2026</p>
+    <p class="footer-small">יהיה אגדה. בואו נתכונן! 🪄💛</p>
+  </footer>
+
+  <!-- כפתור קונפטי צף -->
+  <button class="confetti-btn" id="confettiBtn" title="חגיגה!">🎉</button>
+
+  <!-- ספריות חיצוניות -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
